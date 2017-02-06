@@ -5,9 +5,37 @@ import com.voice.app.Agent_Manager.domain.interfaces.StatsRecord;
 public class StatsRecordHibernate implements StatsRecord{
 	private String date, agent, campaign;
 	double loggedHours, breakHours, followUpHours, meetTrainHours,
-		hoursMinusExcessBreak, leadsPerHour, followUpMinutesPerLead;
+		hoursMinusExcessBreak, callsPerHour, contactsPerHour, leadsPerHour, 
+		followUpMinutesPerLead;
 	int callsMade, contacts;
 	
+	/**
+	 * Default Constructor
+	 */
+	public StatsRecordHibernate(){}
+	
+	/**
+	 * 1-Param Constructor takes in a string array
+	 * containing the data points stored by this 
+	 * class.  To be used with .csv input format.
+	 * @param input string array of input data points
+	 */
+	public StatsRecordHibernate(String[] input){
+		date = input[0];
+		agent = input[1];
+		campaign = input[2];
+		loggedHours = Double.parseDouble(input[3]);
+		breakHours = Double.parseDouble(input[4]);
+		followUpHours = Double.parseDouble(input[5]);
+		meetTrainHours = Double.parseDouble(input[6]);
+		hoursMinusExcessBreak = Double.parseDouble(input[7]);
+		callsMade = Integer.parseInt(input[8]);
+		callsPerHour = Double.parseDouble(input[9]);
+		contacts = Integer.parseInt(input[10]);
+		contactsPerHour = Double.parseDouble(input[11]);
+		leadsPerHour = Double.parseDouble(input[12]);
+		followUpMinutesPerLead = Double.parseDouble(input[13]);
+	}
 	
 	@Override
 	/**
@@ -174,10 +202,20 @@ public class StatsRecordHibernate implements StatsRecord{
 	@Override
 	/**
 	 * Returns the number of calls per hour as calculated:
-	 * Calls made / Logged Hours
+	 * Calls made / Logged Hours.
+	 * @return callsPerHour the number of calls per hour on this record
 	 */
 	public double getCallsPerHour() {
-		return callsMade / loggedHours;
+		return callsPerHour;
+	}
+	
+	/**
+	 * Sets the number of calls per hour as calculated:
+	 * Calls made / Logged Hours.
+	 * @param callPerHour the number of calls per hour to set to this record
+	 */
+	public void setCallsPerHour(double callsPerHour){
+		this.callsPerHour = callsPerHour;
 	}
 
 	@Override
@@ -201,10 +239,20 @@ public class StatsRecordHibernate implements StatsRecord{
 	@Override
 	/**
 	 * Returns the number of contacts per hour as calculated:
-	 * Contacts / Logged Hours
+	 * Contacts / Logged Hours.
+	 * @return contactsPerHour the number of contacts per hour on this record
 	 */
 	public double getContactsPerHour() {
-		return contacts / loggedHours;
+		return contactsPerHour;
+	}
+	
+	/**
+	 * Sets the number of contacts per hour on this record as calculated:
+	 * Contacts / Logged Hours.
+	 * @param contactsPerHour the number of contacts per hour to set this record to
+	 */
+	public void setContactsPerHour(double contactsPerHour){
+		this.contactsPerHour = contactsPerHour;
 	}
 
 	@Override

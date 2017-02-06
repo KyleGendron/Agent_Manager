@@ -22,9 +22,11 @@ public interface StatsRecord {
 	public int getCallsMade();
 	public void setCallsMade(int callsMade);
 	public double getCallsPerHour();
+	public void setCallsPerHour(double callsPerHour);
 	public int getContacts();
 	public void setContacts(int contacts);
 	public double getContactsPerHour();
+	public void setContactsPerHour(double contactsPerHour);
 	public double getLeadsPerHour();
 	public void setLeadsPerHour(double leadsPerHour);
 	public double getFollowUpMinutesPerLead();
