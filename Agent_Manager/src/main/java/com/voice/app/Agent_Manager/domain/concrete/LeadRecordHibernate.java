@@ -15,6 +15,7 @@ public class LeadRecordHibernate implements LeadRecord{
 		company, phone, submittedAs, passedType, coachingNotes;
 	private boolean includedOnOF;
 	private double incentiveValue; //in USD
+	private int id; //id for easy unique identification in Hibernate
 
 	//TODO: Implement any Hibernate-specific functionality
 	
@@ -256,6 +257,14 @@ public class LeadRecordHibernate implements LeadRecord{
 	 */
 	public void setCoachingNotes(String coachingNotes) {
 		this.coachingNotes = coachingNotes;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }

@@ -2,12 +2,19 @@ package com.voice.app.Agent_Manager.domain.concrete;
 
 import com.voice.app.Agent_Manager.domain.interfaces.StatsRecord;
 
+/**
+ * Class that represents a stats entry for an agent on a given day.
+ * Is a concrete Hibernate implementation of the StatsRecord interface.
+ * @author Kyle Gendron
+ * @See StatsRecord
+ *
+ */
 public class StatsRecordHibernate implements StatsRecord{
 	private String date, agent, campaign;
-	double loggedHours, breakHours, followUpHours, meetTrainHours,
+	private double loggedHours, breakHours, followUpHours, meetTrainHours,
 		hoursMinusExcessBreak, callsPerHour, contactsPerHour, leadsPerHour, 
 		followUpMinutesPerLead;
-	int callsMade, contacts;
+	private int id, callsMade, contacts;
 	
 	/**
 	 * Default Constructor
@@ -289,6 +296,14 @@ public class StatsRecordHibernate implements StatsRecord{
 	 */
 	public void setFollowUpMinutesPerLead(double followUpMinutesPerLead) {
 		this.followUpMinutesPerLead = followUpMinutesPerLead;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }

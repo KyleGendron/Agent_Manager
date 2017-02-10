@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="LeadRecordHibernate" table="LEADRECORD">
+      <meta attribute="class-description">
+         This class contains agent lead record detail. 
+      </meta>
+      <id name="id" type="int" column="id">
+         <generator class="native"/>
+      </id>
+      <property name="date" column="date" type="string"/>
+      <property name="dialer" column="dialer" type="string"/>
+      <property name="agent" column="agent" type="string"/>
+      <property name="cOID" column="COID" type="string"/>
+      <property name="aID" column="AID" type="string"/>
+      <property name="campaign" column="campaign" type="string"/>
+      <property name="company" column="company" type="string"/>
+      <property name="phone" column="phone" type="string"/>
+      <property name="IncludeOnOF" column="included_on_output_file" type="yes/no"/>
+      <property name="submittedAs" column="submitted_as" type="string"/>
+      <property name="passedType" column="passed_type" type="string"/>
+      <property name="incentiveValue" column="incentive_value" type="double"/>
+      <property name="coachingNotes" column="coaching_notes" type="string"/>
+   </class>
+</hibernate-mapping>

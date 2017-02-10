@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="StatsRecordHibernate" table="STATSRECORD">
+      <meta attribute="class-description">
+         This class contains agent stat record details. 
+      </meta>
+      <id name="id" type="int" column="id">
+         <generator class="native"/>
+      </id>
+      <property name="date" column="date" type="string"/>
+      <property name="agent" column="agent" type="string"/>
+      <property name="campaign" column="campaign" type="string"/>
+      <property name="loggedHours" column="logged_hours" type="double"/>
+      <property name="breakHours" column="break_hours" type="double"/>
+      <property name="followUpHours" column="followup_hours" type="double"/>
+      <property name="meetTrainHours" column="meettrain_hours" type="double"/>
+      <property name="hoursMinusExcessBreak" column="hours_minus_excess_break" type="double"/>
+      <property name="callsMade" column="calls_made" type="int"/>
+      <property name="callsPerHour" column="calls_per_hour" type="double"/>
+      <property name="contacts" column="contacts" type="int"/>
+      <property name="contactsPerHour" column="contacts_per_hour" type="double"/>
+      <property name="leadsPerHour" column="leads_per_hour" type="double"/>
+      <property name="loggedHours" column="logged_hours" type="double"/>
+      <property name="followUpMinutesPerLead" column="followup_minutes_per_lead" type="double"/>
+   </class>
+</hibernate-mapping>
