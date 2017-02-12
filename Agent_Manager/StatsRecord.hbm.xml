@@ -24,7 +24,6 @@
       <property name="contacts" column="contacts" type="int"/>
       <property name="contactsPerHour" column="contacts_per_hour" type="double"/>
       <property name="leadsPerHour" column="leads_per_hour" type="double"/>
-      <property name="loggedHours" column="logged_hours" type="double"/>
       <property name="followUpMinutesPerLead" column="followup_minutes_per_lead" type="double"/>
    </class>
 </hibernate-mapping>
