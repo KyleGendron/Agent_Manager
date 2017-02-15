@@ -4,6 +4,7 @@ import com.voice.app.Agent_Manager.dao.concrete.LeadRecordDAOHibernate;
 import com.voice.app.Agent_Manager.dao.concrete.StatsRecordDAOHibernate;
 import com.voice.app.Agent_Manager.dao.interfaces.ILeadRecordDAO;
 import com.voice.app.Agent_Manager.dao.interfaces.IStatsRecordDAO;
+import com.voice.app.Agent_Manager.domain.concrete.LeadRecordHibernate;
 import com.voice.app.Agent_Manager.domain.interfaces.LeadRecord;
 import com.voice.app.Agent_Manager.domain.interfaces.StatsRecord;
 
@@ -14,7 +15,6 @@ import com.voice.app.Agent_Manager.domain.interfaces.StatsRecord;
  * @author Kyle Gendron
  *
  */
-
 public final class DAOFactoryHibernate extends DAOFactory{
 
 	/**

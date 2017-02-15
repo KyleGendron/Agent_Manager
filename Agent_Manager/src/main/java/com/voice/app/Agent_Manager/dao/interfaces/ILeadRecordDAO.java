@@ -8,14 +8,14 @@ import java.util.List;
  * 
  * @author Kyle Gendron
  */
-public interface ILeadRecordDAO<T> extends GenericDAO<String, T> {
+public interface ILeadRecordDAO<T> extends GenericDAO<Integer, T> {
   /**
    * Add a PregnancyVisit to the DAO repository
    *
    * @param record any PregnancyVisit object
    */
   @Override
-  int add(String id, T record);
+  int add(Integer id, T record);
 
   /**
    * Update a PregnancyVisit in the DAO repository
@@ -23,7 +23,7 @@ public interface ILeadRecordDAO<T> extends GenericDAO<String, T> {
    * @param record any PregnancyVisit object
    */
   @Override
-  int update(String id, T record);
+  int update(Integer id, T record);
 
   /**
    * Remove a PregnancyVisit in the DAO repository
@@ -31,7 +31,7 @@ public interface ILeadRecordDAO<T> extends GenericDAO<String, T> {
    * @param id of the PregnancyVisit object to remove
    */
   @Override
-  int remove(String id);
+  int remove(Integer id);
 
   /**
    * Find a PregnancyVisit in the DAO repository
@@ -40,7 +40,7 @@ public interface ILeadRecordDAO<T> extends GenericDAO<String, T> {
    * @return the PregnancyVisit with id field equal to key
    */
   @Override
-  T find(String key);
+  T find(Integer key);
 
   /**
    * Generate a list of AntenatalVisits in the DAO repository

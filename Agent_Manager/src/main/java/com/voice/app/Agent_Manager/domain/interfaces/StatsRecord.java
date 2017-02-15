@@ -2,7 +2,8 @@ package com.voice.app.Agent_Manager.domain.interfaces;
 
 public interface StatsRecord {
 	//getters and setters
-	//TODO: expand to include DB logic if necessary
+	public int getId();
+	public void setId(int id);
 	public String getDate();
 	public void setDate(String date);
 	public String getAgent();
