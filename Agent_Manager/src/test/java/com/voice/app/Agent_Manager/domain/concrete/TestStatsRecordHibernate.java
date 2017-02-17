@@ -6,8 +6,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TestStatsRecordHibernate {
-	private static StatsRecordHibernate changedRecord;
-	private static StatsRecordHibernate unchangedRecord;
+	private static StatsRecord changedRecord;
+	private static StatsRecord unchangedRecord;
 	private static String[] input = {"2/1/2017","John Doe", "Sam's Club",
 			"6.14888888888888","1.20722222222222", "0.390833333333333",
 			"0.189999999999999", "5.44166666666666", "97", "15.7752078062884",
@@ -16,8 +16,8 @@ public class TestStatsRecordHibernate {
 	@BeforeClass
 	//separate instances created in case tests are not executed in order
 	   public static void setUpBeforeClass() throws Exception {
-		changedRecord = new StatsRecordHibernate(input);
-		unchangedRecord = new StatsRecordHibernate(input);
+		changedRecord = new StatsRecord(input);
+		unchangedRecord = new StatsRecord(input);
 	}
 	
 	//Test getters

@@ -1,7 +1,5 @@
 package com.voice.app.Agent_Manager.domain.concrete;
 
-import com.voice.app.Agent_Manager.domain.interfaces.StatsRecord;
-
 /**
  * Class that represents a stats entry for an agent on a given day.
  * Is a concrete Hibernate implementation of the StatsRecord interface.
@@ -9,7 +7,7 @@ import com.voice.app.Agent_Manager.domain.interfaces.StatsRecord;
  * @See StatsRecord
  *
  */
-public class StatsRecordHibernate implements StatsRecord{
+public class StatsRecord{
 	private String date, agent, campaign;
 	private double loggedHours, breakHours, followUpHours, meetTrainHours,
 		hoursMinusExcessBreak, callsPerHour, contactsPerHour, leadsPerHour, 
@@ -19,7 +17,7 @@ public class StatsRecordHibernate implements StatsRecord{
 	/**
 	 * Default Constructor
 	 */
-	public StatsRecordHibernate(){}
+	public StatsRecord(){}
 	
 	/**
 	 * 1-Param Constructor takes in a string array
@@ -27,7 +25,7 @@ public class StatsRecordHibernate implements StatsRecord{
 	 * class.  To be used with .csv input format.
 	 * @param input string array of input data points
 	 */
-	public StatsRecordHibernate(String[] input){
+	public StatsRecord(String[] input){
 		date = input[0];
 		agent = input[1];
 		campaign = input[2];
@@ -44,7 +42,6 @@ public class StatsRecordHibernate implements StatsRecord{
 		followUpMinutesPerLead = Double.parseDouble(input[13]);
 	}
 	
-	@Override
 	/**
 	 * Returns date associated with this stats record.
 	 * @return date the date this record refers to
@@ -53,7 +50,7 @@ public class StatsRecordHibernate implements StatsRecord{
 		return date;
 	}
 
-	@Override
+	
 	/**
 	 * Sets the date associated with this stats record.
 	 * @param date the date to set this record to
@@ -62,7 +59,7 @@ public class StatsRecordHibernate implements StatsRecord{
 		this.date = date;
 	}
 
-	@Override
+	
 	/**
 	 * Returns the agent associated with this stats record.
 	 * @return agent the agent associated with this record
@@ -71,7 +68,7 @@ public class StatsRecordHibernate implements StatsRecord{
 		return agent;
 	}
 
-	@Override
+	
 	/**
 	 * Sets the agent associated with this record.
 	 * @param agent the agent to associate with this record
@@ -80,7 +77,7 @@ public class StatsRecordHibernate implements StatsRecord{
 		this.agent = agent;
 	}
 
-	@Override
+	
 	/**
 	 * Returns the campaign associated with this record.
 	 * @return campaign the campaign associated with this record
@@ -89,7 +86,7 @@ public class StatsRecordHibernate implements StatsRecord{
 		return campaign;
 	}
 
-	@Override
+	
 	/**
 	 * Sets the campaign associated with this record.
 	 * @param campaign the campaign to associate this record with
@@ -98,7 +95,7 @@ public class StatsRecordHibernate implements StatsRecord{
 		this.campaign = campaign;
 	}
 
-	@Override
+	
 	/**
 	 * Returns the total logged hours on this record.
 	 * @return loggedHours the total logged hours on this record
@@ -107,7 +104,7 @@ public class StatsRecordHibernate implements StatsRecord{
 		return loggedHours;
 	}
 
-	@Override
+	
 	/**
 	 * Sets the total logged hours on this record.
 	 * @param loggedHours the total logged hours to set this record to
@@ -116,7 +113,7 @@ public class StatsRecordHibernate implements StatsRecord{
 		this.loggedHours = loggedHours;
 	}
 
-	@Override
+	
 	/**
 	 * Returns the total break hours on this record.
 	 * @return breakHours the total break hours on this record
@@ -125,7 +122,7 @@ public class StatsRecordHibernate implements StatsRecord{
 		return breakHours;
 	}
 
-	@Override
+	
 	/**
 	 * Sets the total break hours on this record.
 	 * @param breakHours the total break hours to set this record to
@@ -134,7 +131,7 @@ public class StatsRecordHibernate implements StatsRecord{
 		this.breakHours = breakHours;
 	}
 
-	@Override
+	
 	/**
 	 * Returns the total Follow Up hours on this record.
 	 * @return followUpHours the total Follow Up hours on this record
@@ -143,7 +140,7 @@ public class StatsRecordHibernate implements StatsRecord{
 		return followUpHours;
 	}
 
-	@Override
+	
 	/**
 	 * Sets the total Follow Up hours on this record.
 	 * @param followUpHours the total Follow Up hours to set this record to
@@ -152,7 +149,7 @@ public class StatsRecordHibernate implements StatsRecord{
 		this.followUpHours = followUpHours;
 	}
 
-	@Override
+	
 	/**
 	 * Returns the total meeting/training hours on this record.
 	 * @return meetTrainHours the total meeting/training hours on this record
@@ -161,7 +158,7 @@ public class StatsRecordHibernate implements StatsRecord{
 		return meetTrainHours;
 	}
 
-	@Override
+	
 	/**
 	 * Sets the total meeting/training hours on this record.
 	 * @param meetTrainHours the total meeting/training hours to set this record to
@@ -170,7 +167,7 @@ public class StatsRecordHibernate implements StatsRecord{
 		this.meetTrainHours = meetTrainHours;
 	}
 
-	@Override
+	
 	/**
 	 * Returns the total hours minus excess break on this record.
 	 * @return hoursMinusExcessBreak the total hours minus excess break on this record
@@ -179,7 +176,7 @@ public class StatsRecordHibernate implements StatsRecord{
 		return hoursMinusExcessBreak;
 	}
 
-	@Override
+	
 	/**
 	 * Sets the total hours minus excess break on this record.
 	 * @param hoursMinusExcessBreak the total hours minus excess break on this record
@@ -188,7 +185,7 @@ public class StatsRecordHibernate implements StatsRecord{
 		this.hoursMinusExcessBreak = hoursMinusExcessBreak;
 	}
 
-	@Override
+	
 	/**
 	 * Returns the total calls made on this record.
 	 * @return callsMade the total calls made on this record
@@ -197,7 +194,7 @@ public class StatsRecordHibernate implements StatsRecord{
 		return callsMade;
 	}
 
-	@Override
+	
 	/**
 	 * Sets the total calls made on this record.
 	 * @param callsMade the total calls made to set this record to
@@ -206,7 +203,7 @@ public class StatsRecordHibernate implements StatsRecord{
 		this.callsMade = callsMade;
 	}
 
-	@Override
+	
 	/**
 	 * Returns the number of calls per hour as calculated:
 	 * Calls made / Logged Hours.
@@ -225,7 +222,7 @@ public class StatsRecordHibernate implements StatsRecord{
 		this.callsPerHour = callsPerHour;
 	}
 
-	@Override
+	
 	/**
 	 * Returns the total contacts made on this record.
 	 * @return contacts the total contacts made on this record
@@ -234,7 +231,7 @@ public class StatsRecordHibernate implements StatsRecord{
 		return contacts;
 	}
 
-	@Override
+	
 	/**
 	 * Sets the total contacts made on this record.
 	 * @param contacts the total contacts made to set this record to
@@ -243,7 +240,7 @@ public class StatsRecordHibernate implements StatsRecord{
 		this.contacts = contacts;
 	}
 
-	@Override
+	
 	/**
 	 * Returns the number of contacts per hour as calculated:
 	 * Contacts / Logged Hours.
@@ -262,7 +259,7 @@ public class StatsRecordHibernate implements StatsRecord{
 		this.contactsPerHour = contactsPerHour;
 	}
 
-	@Override
+	
 	/**
 	 * Returns the number of leads per hour on this record.
 	 * @return leadsPerHour the number of leads per hour on this record
@@ -271,7 +268,7 @@ public class StatsRecordHibernate implements StatsRecord{
 		return leadsPerHour;
 	}
 
-	@Override
+	
 	/**
 	 * Sets the number of leads per hour on this record.
 	 * @param leadsPerHour the number of leads per hour to set this record to
@@ -280,7 +277,7 @@ public class StatsRecordHibernate implements StatsRecord{
 		this.leadsPerHour = leadsPerHour;
 	}
 
-	@Override
+	
 	/**
 	 * Returns the total follow up minutes per lead on this record.
 	 * @return followUpMinutesPerLead the total follow up minutes per lead on this record
@@ -289,7 +286,7 @@ public class StatsRecordHibernate implements StatsRecord{
 		return followUpMinutesPerLead;
 	}
 
-	@Override
+	
 	/**
 	 * Sets the total follow up minutes per lead on this record.
 	 * @param followUpMinutesPerLead the total follow up minutes per lead to set this record to

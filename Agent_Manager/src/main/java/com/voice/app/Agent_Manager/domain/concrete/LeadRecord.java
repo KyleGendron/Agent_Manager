@@ -1,6 +1,5 @@
 package com.voice.app.Agent_Manager.domain.concrete;
 
-import com.voice.app.Agent_Manager.domain.interfaces.LeadRecord;
 
 /**
  * Class that represents a lead record as submitted by an agent
@@ -10,7 +9,7 @@ import com.voice.app.Agent_Manager.domain.interfaces.LeadRecord;
  * @author Kyle Gendron
  * @see LeadRecord
  */
-public class LeadRecordHibernate implements LeadRecord{
+public class LeadRecord{
 	private String date, dialer, agent, cOID, aID, campaign,
 		company, phone, submittedAs, passedType, coachingNotes;
 	private boolean includedOnOF;
@@ -22,7 +21,7 @@ public class LeadRecordHibernate implements LeadRecord{
 	/**
 	 * Default constructor
 	 */
-	public LeadRecordHibernate(){}
+	public LeadRecord(){}
 	
 	/**
 	 * Constructor that takes in string array,
@@ -31,7 +30,7 @@ public class LeadRecordHibernate implements LeadRecord{
 	 * Expects that the input has already been validated.
 	 * @param input string array containing data points
 	 */
-	public LeadRecordHibernate(String[] input){
+	public LeadRecord(String[] input){
 		date = input[0];
 		dialer = input[1];
 		agent = input[2];
@@ -103,7 +102,7 @@ public class LeadRecordHibernate implements LeadRecord{
 	 * Returns the COID of this record.
 	 * @return cOId the COID associated with this record
 	 */
-	public String getCOID() {
+	public String getcOID() {
 		return cOID;
 	}
 
@@ -111,7 +110,7 @@ public class LeadRecordHibernate implements LeadRecord{
 	 * Sets the COID of this record.
 	 * @param cOId the COId to set this record to.
 	 */
-	public void setCOID(String cOID) {
+	public void setcOID(String cOID) {
 		this.cOID = cOID;
 	}
 
@@ -119,7 +118,7 @@ public class LeadRecordHibernate implements LeadRecord{
 	 * Returns the AID associated with this record.
 	 * @return aID the AID associated with this record
 	 */
-	public String getAID() {
+	public String getaID() {
 		return aID;
 	}
 
@@ -127,7 +126,7 @@ public class LeadRecordHibernate implements LeadRecord{
 	 * Sets the AID of this record.
 	 * @param aID the AID to set this record to
 	 */
-	public void setAID(String aID) {
+	public void setaID(String aID) {
 		this.aID = aID;
 	}
 

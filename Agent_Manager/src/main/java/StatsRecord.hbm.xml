@@ -4,7 +4,7 @@
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
 <hibernate-mapping>
-   <class name="StatsRecordHibernate" table="statsrecord">
+   <class name="com.voice.app.Agent_Manager.domain.concrete.StatsRecord" table="statsrecord">
       <meta attribute="class-description">
          This class contains agent stat record details. 
       </meta>

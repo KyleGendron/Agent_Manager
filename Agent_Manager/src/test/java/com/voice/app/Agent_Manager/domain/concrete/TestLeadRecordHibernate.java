@@ -5,7 +5,7 @@ import org.junit.*;
 
 public class TestLeadRecordHibernate {
 	
-	private static LeadRecordHibernate recordUnchanged, recordChanged;
+	private static LeadRecord recordUnchanged, recordChanged;
 	private static String[] input = {"1/31/2017","F","John Doe","003A000000fZJzxIAG",
 			"001A000000W90b8IAB", "Q1 2017 Voice B2B Campaign",
 			"Blood and Guts OB/GYN","5556278924","x","Registered",
@@ -13,8 +13,8 @@ public class TestLeadRecordHibernate {
 	
 	@BeforeClass
 	   public static void setUpBeforeClass() throws Exception {
-		recordUnchanged = new LeadRecordHibernate(input);
-		recordChanged = new LeadRecordHibernate(input);
+		recordUnchanged = new LeadRecord(input);
+		recordChanged = new LeadRecord(input);
 	}
 	
 	//Test getters
@@ -36,12 +36,12 @@ public class TestLeadRecordHibernate {
 	
 	@Test
 	public void testGetCOID(){
-		assertEquals("Original COID does not equal stored COID.", "003A000000fZJzxIAG", recordUnchanged.getCOID());
+		assertEquals("Original COID does not equal stored COID.", "003A000000fZJzxIAG", recordUnchanged.getcOID());
 	}
 	
 	@Test
 	public void testGetAID(){
-		assertEquals("Original AID does not equal stored AID.", "001A000000W90b8IAB", recordUnchanged.getAID());
+		assertEquals("Original AID does not equal stored AID.", "001A000000W90b8IAB", recordUnchanged.getaID());
 	}
 	
 	@Test
@@ -110,15 +110,15 @@ public class TestLeadRecordHibernate {
 	@Test
 	public void testSetCOID(){
 		String cOID = "1234lkj536lkj3245";
-		recordChanged.setCOID(cOID);
-		assertEquals("Original COID does not equal stored COID.", cOID, recordChanged.getCOID());
+		recordChanged.setcOID(cOID);
+		assertEquals("Original COID does not equal stored COID.", cOID, recordChanged.getcOID());
 	}
 	
 	@Test
 	public void testSetAID(){
 		String aID = "lk32546j48hk5kj";
-		recordChanged.setAID(aID);
-		assertEquals("Original AID does not equal stored AID.", aID, recordChanged.getAID());
+		recordChanged.setaID(aID);
+		assertEquals("Original AID does not equal stored AID.", aID, recordChanged.getaID());
 	}
 	
 	@Test

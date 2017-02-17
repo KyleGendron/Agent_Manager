@@ -11,10 +11,15 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import com.voice.app.Agent_Manager.dao.interfaces.IStatsRecordDAO;
-import com.voice.app.Agent_Manager.domain.concrete.StatsRecordHibernate;
-import com.voice.app.Agent_Manager.domain.interfaces.LeadRecord;
-import com.voice.app.Agent_Manager.domain.interfaces.StatsRecord;
+import com.voice.app.Agent_Manager.domain.concrete.LeadRecord;
+import com.voice.app.Agent_Manager.domain.concrete.StatsRecord;
 
+/**
+ * Class that handles database interactions with Stats Record Objects.
+ * 
+ * @author Kyle Gendron
+ *
+ */
 public class StatsRecordDAOHibernate implements IStatsRecordDAO<StatsRecord>{
 	private static SessionFactory factory;
 
@@ -90,7 +95,7 @@ public class StatsRecordDAOHibernate implements IStatsRecordDAO<StatsRecord>{
 		try{
 			tx = session.beginTransaction();
 			StatsRecord record = 
-					(StatsRecord) session.get(LeadRecord.class, key);
+					(StatsRecord) session.get(StatsRecord.class, key);
 			return record;
 		}catch (HibernateException e) {
 			if (tx!=null) tx.rollback();

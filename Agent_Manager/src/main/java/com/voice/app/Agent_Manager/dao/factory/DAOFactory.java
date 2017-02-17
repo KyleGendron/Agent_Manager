@@ -2,8 +2,8 @@ package com.voice.app.Agent_Manager.dao.factory;
 
 import com.voice.app.Agent_Manager.dao.interfaces.ILeadRecordDAO;
 import com.voice.app.Agent_Manager.dao.interfaces.IStatsRecordDAO;
-import com.voice.app.Agent_Manager.domain.interfaces.LeadRecord;
-import com.voice.app.Agent_Manager.domain.interfaces.StatsRecord;
+import com.voice.app.Agent_Manager.domain.concrete.LeadRecord;
+import com.voice.app.Agent_Manager.domain.concrete.StatsRecord;
 
 /**
  * Abstract class that creates all types of DAOs

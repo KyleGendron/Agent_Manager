@@ -11,7 +11,8 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import com.voice.app.Agent_Manager.dao.interfaces.ILeadRecordDAO;
-import com.voice.app.Agent_Manager.domain.interfaces.LeadRecord;
+import com.voice.app.Agent_Manager.domain.concrete.LeadRecord;
+
 
 /**
  * Hibernate-specific DAO.  Since id-management is taken care of by
@@ -30,9 +31,10 @@ public class LeadRecordDAOHibernate implements ILeadRecordDAO<LeadRecord>{
 	 */
 	public LeadRecordDAOHibernate(){
 		try{
-			factory = new Configuration().configure().buildSessionFactory();
+			factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
 		}catch(Throwable ex){
 			System.err.println("Failed to create sessionFactory object." + ex);
+			ex.printStackTrace();
 			throw new ExceptionInInitializerError(ex); 
 		}
 	}
@@ -62,13 +64,14 @@ public class LeadRecordDAOHibernate implements ILeadRecordDAO<LeadRecord>{
 			tx = session.beginTransaction();
 			session.update(record);
 			tx.commit();
+			return id;
 		}catch (HibernateException e) {
 			if (tx!=null) tx.rollback();
 			e.printStackTrace(); 
 		}finally {
 			session.close(); 
 		}
-		return 0;
+		return -1;
 	}
 
 	@Override
@@ -81,13 +84,14 @@ public class LeadRecordDAOHibernate implements ILeadRecordDAO<LeadRecord>{
 					(LeadRecord) session.get(LeadRecord.class, id);
 			session.delete(record);
 			tx.commit();
+			return id;
 		}catch (HibernateException e) {
 			if (tx!=null) tx.rollback();
 			e.printStackTrace(); 
 		}finally {
 			session.close(); 
 		}
-		return 0;
+		return -1;
 	}
 
 	@Override
