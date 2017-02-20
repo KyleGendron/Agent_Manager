@@ -1,18 +1,21 @@
 package com.voice.app.Agent_Manager.view;
 
+import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JTabbedPane;
 
 import com.voice.app.Agent_Manager.controller.MainMenuController;
 
 @SuppressWarnings("serial")
 public class MainMenuView extends JFrame{
-	MainMenuController controller;
-	JMenuItem addFromFile;
+	private MainMenuController controller;
+	private JMenuItem addLeadsFromFile, addStatsFromFile;
+	private JTabbedPane tabbedPane;
 	
 	/**
 	 * Default, 1-param constructor.
@@ -26,6 +29,7 @@ public class MainMenuView extends JFrame{
 	 * Helper method that initializes the base GUI.
 	 */
 	public void initialize(){
+		setLayout(new GridLayout(1,1));
 		
 		//create menu bar
 		JMenuBar menuBar = new JMenuBar();
@@ -41,7 +45,7 @@ public class MainMenuView extends JFrame{
 		addLeadsSubMenu.setMnemonic(KeyEvent.VK_L);
 		
 		//create add leads submenu items and add them
-		JMenuItem addLeadsFromFile = new JMenuItem("Add Leads From File");
+		addLeadsFromFile = new JMenuItem("Add Leads From File");
 		addLeadsFromFile.addActionListener(controller);
 		JMenuItem addLeadsIndividually = new JMenuItem("Add Leads Manually");
 		addLeadsIndividually.addActionListener(controller);
@@ -53,7 +57,7 @@ public class MainMenuView extends JFrame{
 		addStatsSubMenu.setMnemonic(KeyEvent.VK_R);
 		
 		//create add stats submenu items and add them
-		JMenuItem addStatsFromFile = new JMenuItem("Add Stats From File");
+		addStatsFromFile = new JMenuItem("Add Stats From File");
 		addStatsFromFile.addActionListener(controller);
 		JMenuItem addStatsIndividually = new JMenuItem("Add Stats Manually");
 		addStatsIndividually.addActionListener(controller);
@@ -98,10 +102,32 @@ public class MainMenuView extends JFrame{
 		menuBar.add(menu);
 		this.setJMenuBar(menuBar);
 		
+		//add tabbed frame
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
+		add(tabbedPane);
+		
 		//final frame settings to adjust
 		setTitle("Agent Manager");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
+	}
+	
+	/**
+	 * Returns the Menu Item corresponding to the Add Leads From File
+	 * entry in the main menu.
+	 * @return addLeadsFromFile the menu item
+	 */
+	public JMenuItem getAddLeadsFromFileItem(){
+		return addLeadsFromFile;
+	}
+	
+	/**
+	 * Returns the Menu Item corresponding to the Add Stats from File
+	 * entry in the main menu.
+	 * @return addStatsFromFile the menu item
+	 */
+	public JMenuItem getAddStatsFromFileItem(){
+		return addStatsFromFile;
 	}
 }
