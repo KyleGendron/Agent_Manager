@@ -29,11 +29,15 @@ public class LeadConverterCSV {
 			String[] lines = input.split("(\r\n|\r|\n)");
 			for(int i = 0; i < lines.length; i++){
 				//check format carefully
-				if(lines[i].matches("[0-9]{1,2}\\/[0-9]{1,2}\\/[0-9]{4},[A-Z]{1},[a-zA-z\\s]{1,100},[a-zA-Z0-9]{0,100},[a-zA-Z0-9]{0,100},([^,]{1,100}|\\\".*\\\"),([^,]{0,100}|\\\".*\\\"),[0-9]{1,100},[x | N]?,[a-zA-z\\s-]{1,100},[a-zA-z\\s-]{1,100},\\$[0-9]+\\.[0-9]{2}[\\s]?,[^,]{0,200}")){
-					record = new LeadRecord(lines[i].split(","));
+				if(lines[i].matches("[0-9]{1,2}\\/[0-9]{1,2}\\/[0-9]{4},"
+						+ "[A-Z]{1},[a-zA-z\\s]{1,100},[a-zA-Z0-9]{0,100},"
+						+ "[a-zA-Z0-9]{0,100},([^,]{1,100}|\\\".*\\\"),"
+						+ "([^,]{0,100}|\\\".*\\\"),[0-9]{1,100},[x | N]?,"
+						+ "[a-zA-z\\s-]{1,100},[a-zA-z\\s-]{1,100},"
+						+ "\\$[0-9]+\\.[0-9]{2}[\\s]?,[^,]{0,200}")){
+					record = new LeadRecord(cleanInput(lines[i]).split(","));
 					result.add(record);
-				}else
-					System.out.println(lines[i]);
+				}
 			}
 			if(result.isEmpty()){
 				return null;
@@ -54,29 +58,26 @@ public class LeadConverterCSV {
 	 */
 	public String cleanInput(String input){
 		int lastIndex = 0; //lastIndex pushed to StringBuilder
-		int j; // index to be used to skip over examined substrings
 		StringBuilder result = new StringBuilder();
 		for(int i = 0; i < input.length(); i++){
-
 			//if we've reached the end of the string,
 			if(i == input.length()-1)
-				result.append(input.substring(lastIndex, i));
-			
+				result.append(input.substring(lastIndex, input.length()));
 			//look for opening quote
 			if(input.charAt(i) == '\"'){
 				//grab everything before opening quote
 				result.append(input.substring(lastIndex, i)); 
 				//look for closing quote
-				for(j = i; j < input.length(); j++){
+				for(int j = i+1; j < input.length(); j++){
 					if(input.charAt(j) == '\"'){
 						//add everything in between, but not including, quotes
-						result.append(input.substring(i+1, j-1));
+						result.append(input.substring(i+1, j).replaceAll(",", ""));
 						lastIndex = j+1; //again, exclude quotes
 					}
 				}
 				i = lastIndex;
 			}
 		}
-		return input;
+		return result.toString();
 	}
 }

@@ -46,7 +46,10 @@ public class LeadRecord{
 		submittedAs = input[9];
 		passedType = input[10];
 		incentiveValue = Double.parseDouble(input[11].substring(1));
-		coachingNotes = input[12];
+		if(input.length == 13)
+			coachingNotes = input[12];
+		else
+			coachingNotes = "";
 	}
 	
 	/**

@@ -43,7 +43,6 @@ public class MainMenuController implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		switch(e.getActionCommand()){
 		case "Add Leads From File":
-			System.out.println("Adding Leads from file.");
 			int returnVal = fileChooser.showOpenDialog(view.getAddLeadsFromFileItem());
 			if(returnVal == JFileChooser.APPROVE_OPTION){
 				File file = fileChooser.getSelectedFile();

@@ -22,10 +22,28 @@ public class TestLeadConverterCSV {
 	}
 	
 	@Test
-	public void testClean(){
+	//test with hazardous string
+	public void testCleanHazard(){
 		LeadConverterCSV converter = new LeadConverterCSV(file);
-		String result = converter.cleanInput("2/14/2017,F,Tsinat Efrem,,,Q1 2017 Voice B2B Campaign,\"Treace Medical Concepts, Inc.\","
+		String result = converter.cleanInput("2/14/2017,F,Tsinat Efrem,,,Q1 2017 Voice B2B Campaign,"
+				+ "\"Treace Medical Concepts, Inc.\","
 				+ "9043735940,x,Sent Info - In Market,Sent Info - In Market,$5.00 ,");
-		assertEquals("The converter did not clean the hazardous .csv elements properly", result, "2/14/2017,F,Tsinat Efrem,,,Q1 2017 Voice B2B Campaign,Treace Medical Concepts Inc.,9043735940,x,Sent Info - In Market,Sent Info - In Market,$5.00 ,");
+		assertEquals("The converter did not clean the hazardous .csv elements properly", 
+				result, "2/14/2017,F,Tsinat Efrem,,,Q1 2017 Voice B2B Campaign,"
+						+ "Treace Medical Concepts Inc.,9043735940,x,Sent Info - In Market,"
+						+ "Sent Info - In Market,$5.00 ,");
+	}
+	
+	@Test
+	//test with non-hazardous string
+	public void testCleanRegular(){
+		LeadConverterCSV converter = new LeadConverterCSV(file);
+		String result = converter.cleanInput("1/11/2017,F,Allison Novak,003G0000024ivDyIAI,"
+				+ "001G000001fHGXQIA4,Q1 2017 OTM  FLPMA SAM Conference,Aventura Foot & Ankle Center,"
+				+ "3059356566,N,Booth Demo Booked,Sent Invite,$0.00 ,recode to sent inv");
+		assertEquals("The converter did not clean the hazardous .csv elements properly", 
+				result, "1/11/2017,F,Allison Novak,003G0000024ivDyIAI,001G000001fHGXQIA4,"
+						+ "Q1 2017 OTM  FLPMA SAM Conference,Aventura Foot & Ankle Center,"
+						+ "3059356566,N,Booth Demo Booked,Sent Invite,$0.00 ,recode to sent inv");
 	}
 }
