@@ -70,8 +70,8 @@ public class MainMenuController implements ActionListener{
 			//TODO
 			break;
 		case "Display All Lead Records":
-			System.out.println("Displaying all Lead Records.");
-			//TODO
+			DisplayAllLeadsController controller = new DisplayAllLeadsController(this, daoFactory);
+			view.addTab("All Leads", controller.getView());
 			break;
 		case "Display All Stats Records":
 			System.out.println("Displaying all Stats Records.");
@@ -89,5 +89,13 @@ public class MainMenuController implements ActionListener{
 			System.exit(0);
 			break;
 		}
+	}
+	
+	/**
+	 * Returns the main menu view associated with the main controller.
+	 * @return view the MainMenuView associated with this controller
+	 */
+	public MainMenuView getView(){
+		return view;
 	}
 }

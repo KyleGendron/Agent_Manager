@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import com.voice.app.Agent_Manager.controller.MainMenuController;
@@ -129,5 +130,21 @@ public class MainMenuView extends JFrame{
 	 */
 	public JMenuItem getAddStatsFromFileItem(){
 		return addStatsFromFile;
+	}
+	
+	/**
+	 * Adds panel into a new tab in the main frame.
+	 * @param panel the panel to be added
+	 */
+	public void addTab(String title, JPanel panel){
+		tabbedPane.addTab(title, panel);
+		repaint();
+	}
+	/**
+	 * Removes currently-selected tab in the main frame and its contents.
+	 */
+	public void removeTab(){
+		tabbedPane.remove(tabbedPane.getSelectedIndex());
+		repaint();
 	}
 }
