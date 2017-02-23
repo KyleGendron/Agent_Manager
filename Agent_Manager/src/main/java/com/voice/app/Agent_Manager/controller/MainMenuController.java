@@ -11,7 +11,9 @@ import javax.swing.JOptionPane;
 import com.voice.app.Agent_Manager.dao.factory.DAOFactory;
 import com.voice.app.Agent_Manager.dao.factory.DAOFactoryHibernate;
 import com.voice.app.Agent_Manager.domain.concrete.LeadRecord;
+import com.voice.app.Agent_Manager.domain.concrete.StatsRecord;
 import com.voice.app.Agent_Manager.utils.LeadConverterCSV;
+import com.voice.app.Agent_Manager.utils.StatsConverterCSV;
 import com.voice.app.Agent_Manager.view.MainMenuView;
 
 /**
@@ -62,8 +64,19 @@ public class MainMenuController implements ActionListener{
 			//TODO
 			break;
 		case "Add Stats From File":
-			System.out.println("Adding Stats from file.");
-			//TODO
+			int returnVal2 = fileChooser.showOpenDialog(view.getAddStatsFromFileItem());
+			if(returnVal2 == JFileChooser.APPROVE_OPTION){
+				File file = fileChooser.getSelectedFile();
+				StatsConverterCSV converter = new StatsConverterCSV(file);
+				ArrayList<StatsRecord> statsResult = converter.process();
+				if(statsResult != null && !statsResult.isEmpty()){
+					for(StatsRecord l: statsResult)
+						daoFactory.getStatsDAO().add(0, l);
+					JOptionPane.showMessageDialog(view, "Successfully added!");
+				}else
+					JOptionPane.showMessageDialog(view, "Unable to process "
+							+ file.getName() + "!  Only able to convert .csv files.");
+			}
 			break;
 		case "Add Stats Manually":
 			System.out.println("Adding Stats manually.");
