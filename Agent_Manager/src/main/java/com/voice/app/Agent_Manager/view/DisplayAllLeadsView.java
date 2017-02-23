@@ -78,13 +78,14 @@ public class DisplayAllLeadsView extends JPanel{
 					data[8] = "No";
 				data[9] = l.getSubmittedAs();
 				data[10] = l.getPassedType();
-				data[11] = Double.toString(l.getIncentiveValue());
+				data[11] = l.getIncentiveValue();
 				data[12] = l.getCoachingNotes();
 				model.addRow(data);
 			}
 			JTable table = new JTable(model);
 			JScrollPane scrollPane = new JScrollPane(table);
 			table.setFillsViewportHeight(true);
+			table.setAutoCreateRowSorter(true);
 			add(scrollPane, tableConstraints);
 		}else{ //otherwise, create a small, empty table
 			DefaultTableModel model = new DefaultTableModel(5,columnNames.length);
@@ -92,6 +93,7 @@ public class DisplayAllLeadsView extends JPanel{
 			JTable table = new JTable(model);
 			JScrollPane scrollPane = new JScrollPane(table);
 			table.setFillsViewportHeight(true);
+			table.setAutoCreateRowSorter(true);
 			add(scrollPane, tableConstraints);
 		}
 	}
