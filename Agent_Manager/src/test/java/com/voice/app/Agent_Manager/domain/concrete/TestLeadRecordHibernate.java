@@ -1,12 +1,18 @@
 package com.voice.app.Agent_Manager.domain.concrete;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 import org.junit.*;
 
 public class TestLeadRecordHibernate {
 	
 	private static LeadRecord recordUnchanged, recordChanged;
-	private static String[] input = {"1/31/2017","F","John Doe","003A000000fZJzxIAG",
+	private static String[] input = {"01/31/2017","F","John Doe","003A000000fZJzxIAG",
 			"001A000000W90b8IAB", "Q1 2017 Voice B2B Campaign",
 			"Blood and Guts OB/GYN","5556278924","x","Registered",
 			"Registered","$1.50","No notes in Five9."};
@@ -21,7 +27,9 @@ public class TestLeadRecordHibernate {
 	
 	@Test
 	public void testGetDate(){
-		assertEquals("Original date does not equal stored date.", "1/31/2017", recordUnchanged.getDate());
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/y");
+		LocalDate date = LocalDate.parse(input[0], formatter);
+		assertTrue("Original date does not equal stored date.", date.isEqual(recordUnchanged.getDate()));
 	}
 	
 	@Test
@@ -88,9 +96,10 @@ public class TestLeadRecordHibernate {
 	
 	@Test
 	public void testSetDate(){
-		String date = "1/30/2017";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/y");
+		LocalDate date = LocalDate.parse("1/30/2017", formatter);
 		recordChanged.setDate(date);
-		assertEquals("Original date does not equal stored date.", date, recordChanged.getDate());
+		assertTrue("Original date does not equal stored date.", date.isEqual(recordChanged.getDate()));
 	}
 	
 	@Test

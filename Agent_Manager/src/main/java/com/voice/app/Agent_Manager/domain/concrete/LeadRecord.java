@@ -1,5 +1,8 @@
 package com.voice.app.Agent_Manager.domain.concrete;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
  * Class that represents a lead record as submitted by an agent
@@ -10,7 +13,8 @@ package com.voice.app.Agent_Manager.domain.concrete;
  * @see LeadRecord
  */
 public class LeadRecord{
-	private String date, dialer, agent, cOID, aID, campaign,
+	private LocalDate date;
+	private String dialer, agent, cOID, aID, campaign,
 		company, phone, submittedAs, passedType, coachingNotes;
 	private boolean includedOnOF;
 	private double incentiveValue; //in USD
@@ -31,7 +35,8 @@ public class LeadRecord{
 	 * @param input string array containing data points
 	 */
 	public LeadRecord(String[] input){
-		date = input[0];
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/y");
+		date = LocalDate.parse(input[0], formatter);
 		dialer = input[1];
 		agent = input[2];
 		cOID = input[3];
@@ -56,7 +61,7 @@ public class LeadRecord{
 	 * Returns the date for this record.
 	 * @return date the date associated with this record
 	 */
-	public String getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
@@ -64,7 +69,7 @@ public class LeadRecord{
 	 * Sets the date for this record.
 	 * @param date the date to set this record to
 	 */
-	public void setDate(String date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 		
 	}

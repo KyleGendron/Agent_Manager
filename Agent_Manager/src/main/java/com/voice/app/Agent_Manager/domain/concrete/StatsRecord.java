@@ -1,5 +1,9 @@
 package com.voice.app.Agent_Manager.domain.concrete;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 /**
  * Class that represents a stats entry for an agent on a given day.
  * Is a concrete Hibernate implementation of the StatsRecord interface.
@@ -8,7 +12,8 @@ package com.voice.app.Agent_Manager.domain.concrete;
  *
  */
 public class StatsRecord{
-	private String date, agent, campaign;
+	private LocalDate date;
+	private String agent, campaign;
 	private double loggedHours, breakHours, followUpHours, meetTrainHours,
 		hoursMinusExcessBreak, callsPerHour, contactsPerHour, leadsPerHour, 
 		followUpMinutesPerLead;
@@ -26,7 +31,8 @@ public class StatsRecord{
 	 * @param input string array of input data points
 	 */
 	public StatsRecord(String[] input){
-		date = input[0];
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/y");
+		date = LocalDate.parse(input[0], formatter);
 		agent = input[1];
 		campaign = input[2];
 		loggedHours = Double.parseDouble(input[3]);
@@ -46,7 +52,7 @@ public class StatsRecord{
 	 * Returns date associated with this stats record.
 	 * @return date the date this record refers to
 	 */
-	public String getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
@@ -55,7 +61,7 @@ public class StatsRecord{
 	 * Sets the date associated with this stats record.
 	 * @param date the date to set this record to
 	 */
-	public void setDate(String date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 

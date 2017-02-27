@@ -11,7 +11,7 @@
       <id name="id" type="int" column="id">
          <generator class="native"/>
       </id>
-      <property name="date" column="date" type="string"/>
+      <property name="date" column="date" type="date"/>
       <property name="dialer" column="dialer" type="string"/>
       <property name="agent" column="agent" type="string"/>
       <property name="cOID" column="COID" type="string"/>

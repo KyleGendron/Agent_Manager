@@ -1,6 +1,11 @@
 package com.voice.app.Agent_Manager.domain.concrete;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -24,7 +29,9 @@ public class TestStatsRecordHibernate {
 	
 	@Test
 	public void testGetDate(){
-		assertEquals("Original date does not equal stored date.", "2/1/2017", unchangedRecord.getDate());
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/y");
+		LocalDate date = LocalDate.parse("2/1/2017", formatter);
+		assertTrue("Original date does not equal stored date.", date.isEqual(unchangedRecord.getDate()));
 	}
 	
 	@Test
@@ -96,9 +103,11 @@ public class TestStatsRecordHibernate {
 	
 	@Test
 	public void testSetDate(){
-		String date = "2/2/2017";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/y");
+		LocalDate date = LocalDate.parse("2/2/2017", formatter);
+
 		changedRecord.setDate(date);
-		assertEquals("Set date does not equal stored date.", date, changedRecord.getDate());
+		assertTrue("Set date does not equal stored date.", date.isEqual(changedRecord.getDate()));
 	}
 	
 	@Test
