@@ -31,7 +31,8 @@ public class LeadRecordDAOHibernate implements ILeadRecordDAO<LeadRecord>{
 	 */
 	public LeadRecordDAOHibernate(){
 		try{
-			factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+			factory = new Configuration().configure("hibernate.cfg.xml").
+					addAnnotatedClass(LeadRecord.class).buildSessionFactory();
 		}catch(Throwable ex){
 			System.err.println("Failed to create sessionFactory object." + ex);
 			ex.printStackTrace();

@@ -28,7 +28,8 @@ public class StatsRecordDAOHibernate implements IStatsRecordDAO<StatsRecord>{
 	 */
 	public StatsRecordDAOHibernate(){
 		try{
-			factory = new Configuration().configure().buildSessionFactory();
+			factory = new Configuration().configure().
+					addAnnotatedClass(StatsRecord.class).buildSessionFactory();
 		}catch(Throwable ex){
 			System.err.println("Failed to create sessionFactory object." + ex);
 			throw new ExceptionInInitializerError(ex); 

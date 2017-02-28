@@ -4,6 +4,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Class that represents a stats entry for an agent on a given day.
  * Is a concrete Hibernate implementation of the StatsRecord interface.
@@ -11,13 +18,56 @@ import java.util.Locale;
  * @See StatsRecord
  *
  */
+
+@Entity
+@Table(name = "statsrecord")
 public class StatsRecord{
+	
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private int id;
+	
+	@Column(name = "date")
 	private LocalDate date;
-	private String agent, campaign;
-	private double loggedHours, breakHours, followUpHours, meetTrainHours,
-		hoursMinusExcessBreak, callsPerHour, contactsPerHour, leadsPerHour, 
-		followUpMinutesPerLead;
-	private int id, callsMade, contacts;
+	
+	@Column(name = "agent")
+	private String agent;
+	
+	@Column(name = "campaign")
+	private String campaign;
+	
+	@Column(name = "logged_hours")
+	private double loggedHours;
+	
+	@Column(name = "break_hours")
+	private double breakHours; 
+	
+	@Column(name = "followup_hours")
+	private double followUpHours;
+	
+	@Column(name = "meettrain_hours")
+	private double meetTrainHours;
+	
+	@Column(name = "hours_minus_excess_break")
+	private double hoursMinusExcessBreak;
+	
+	@Column(name = "calls_made")
+	private int callsMade;
+	
+	@Column(name = "calls_per_hour")
+	private double callsPerHour;
+	
+	@Column(name = "contacts")
+	private int contacts;
+	
+	@Column(name = "contacts_per_hour")
+	private double contactsPerHour;
+	
+	@Column(name = "leads_per_hour")
+	private double leadsPerHour;
+	
+	@Column(name = "followup_minutes_per_lead")
+	private double followUpMinutesPerLead;
 	
 	/**
 	 * Default Constructor

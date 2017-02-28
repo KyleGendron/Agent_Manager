@@ -4,6 +4,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Class that represents a lead record as submitted by an agent
  * on a given day and on a given campaign.  This version is implemented
@@ -12,15 +19,53 @@ import java.util.Locale;
  * @author Kyle Gendron
  * @see LeadRecord
  */
-public class LeadRecord{
-	private LocalDate date;
-	private String dialer, agent, cOID, aID, campaign,
-		company, phone, submittedAs, passedType, coachingNotes;
-	private boolean includedOnOF;
-	private double incentiveValue; //in USD
-	private int id; //id for easy unique identification in Hibernate
 
-	//TODO: Implement any Hibernate-specific functionality
+@Entity
+@Table(name = "leadrecord")
+public class LeadRecord{
+	
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private int id; //id for easy unique identification in Hibernate
+	
+	@Column(name = "date")
+	private LocalDate date;
+	
+	@Column(name = "dialer")
+	private String dialer;
+	
+	@Column(name = "agent")
+	private String agent;
+	
+	@Column(name = "COID")
+	private String cOID;
+	
+	@Column(name = "AID")
+	private String aID;
+	
+	@Column(name = "campaign")
+	private String campaign;
+	
+	@Column(name = "company")
+	private String company;
+	
+	@Column(name = "phone")
+	private String phone; 
+	
+	@Column(name = "included_on_output_file")
+	private boolean includedOnOF;
+	
+	@Column(name = "submitted_as")
+	private String submittedAs;
+	
+	@Column(name = "passed_type")
+	private String passedType;
+	
+	@Column(name = "incentive_value")
+	private double incentiveValue; //in USD
+	
+	@Column(name = "coaching_notes")
+	private String coachingNotes;
 	
 	/**
 	 * Default constructor
