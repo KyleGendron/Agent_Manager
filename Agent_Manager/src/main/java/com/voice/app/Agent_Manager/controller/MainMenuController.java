@@ -60,8 +60,8 @@ public class MainMenuController implements ActionListener{
 			}
 			break;
 		case "Add Leads Manually":
-			System.out.println("Adding Leads manually.");
-			//TODO
+			AddSingleLeadController singleLeadController = new AddSingleLeadController();
+			view.addTab("Add Lead", singleLeadController.getView());
 			break;
 		case "Add Stats From File":
 			int returnVal2 = fileChooser.showOpenDialog(view.getAddStatsFromFileItem());
@@ -83,8 +83,8 @@ public class MainMenuController implements ActionListener{
 			//TODO
 			break;
 		case "Display All Lead Records":
-			DisplayAllLeadsController controller = new DisplayAllLeadsController(this, daoFactory);
-			view.addTab("All Leads", controller.getView());
+			DisplayAllLeadsController allLeadsController = new DisplayAllLeadsController(this, daoFactory);
+			view.addTab("All Leads", allLeadsController.getView());
 			break;
 		case "Display All Stats Records":
 			DisplayAllStatsController allStatsController = new DisplayAllStatsController(this, daoFactory);
