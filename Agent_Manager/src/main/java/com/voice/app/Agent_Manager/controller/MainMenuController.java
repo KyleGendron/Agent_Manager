@@ -60,7 +60,7 @@ public class MainMenuController implements ActionListener{
 			}
 			break;
 		case "Add Leads Manually":
-			AddSingleLeadController singleLeadController = new AddSingleLeadController();
+			AddSingleLeadController singleLeadController = new AddSingleLeadController(view);
 			view.addTab("Add Lead", singleLeadController.getView());
 			break;
 		case "Add Stats From File":

@@ -3,9 +3,12 @@ package com.voice.app.Agent_Manager.view;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import com.voice.app.Agent_Manager.controller.AddSingleLeadController;
 
@@ -61,18 +64,21 @@ public class AddSingleLeadView extends JPanel{
 		add(submitButton, submitButtonConstraints);
 		
 		form = new LeadForm();
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.add(form);
 		GridBagConstraints formConstraints = new GridBagConstraints();
 		formConstraints.gridx = 0;
 		formConstraints.gridy = 1;
 		formConstraints.weightx = 1;
 		formConstraints.weighty = 1;
-		formConstraints.fill = GridBagConstraints.BOTH;
-		formConstraints.anchor = GridBagConstraints.PAGE_END;
+		formConstraints.gridheight = 1;
+		formConstraints.gridwidth = 2;
+		formConstraints.anchor = GridBagConstraints.CENTER;
+		formConstraints.insets = new Insets(0, 40, 0, 40);
 		add(form, formConstraints);
 	}
 	
 	public LeadForm getForm(){
 		return form;
 	}
-	//TODO: Highlight label red helper method
 }

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import com.voice.app.Agent_Manager.view.AddSingleLeadView;
+import com.voice.app.Agent_Manager.view.MainMenuView;
 
 /**
  * Controller class that handles the application logic of
@@ -12,20 +13,22 @@ import com.voice.app.Agent_Manager.view.AddSingleLeadView;
  *
  */
 public class AddSingleLeadController implements ActionListener{
+	private MainMenuView mainView;
 	private AddSingleLeadView view;
 	
 	/**
 	 * Default Constructor
 	 */
-	public AddSingleLeadController(){
+	public AddSingleLeadController(MainMenuView mainView){
 		view = new AddSingleLeadView(this);
+		this.mainView = mainView;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch(e.getActionCommand()){
 		case "Cancel":
-			System.out.println("Cancel");
+			mainView.removeTab();
 			break;
 		case "Submit":
 			System.out.println("Submit");

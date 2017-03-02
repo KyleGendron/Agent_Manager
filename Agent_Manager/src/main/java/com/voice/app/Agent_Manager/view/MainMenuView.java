@@ -1,5 +1,6 @@
 package com.voice.app.Agent_Manager.view;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 
@@ -111,6 +112,7 @@ public class MainMenuView extends JFrame{
 		setTitle("Agent Manager");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		setMinimumSize(new Dimension(600,400));
 		setVisible(true);
 	}
 	
@@ -140,6 +142,7 @@ public class MainMenuView extends JFrame{
 		tabbedPane.addTab(title, panel);
 		repaint();
 	}
+	
 	/**
 	 * Removes currently-selected tab in the main frame and its contents.
 	 */

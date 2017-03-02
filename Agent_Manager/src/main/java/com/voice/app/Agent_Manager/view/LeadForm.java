@@ -1,11 +1,12 @@
 package com.voice.app.Agent_Manager.view;
 
-import java.awt.FlowLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerModel;
@@ -23,16 +24,14 @@ import org.jdesktop.swingx.JXDatePicker;
 public class LeadForm extends JPanel{
 	private JLabel dateLabel, dialerLabel, agentLabel, 
 	cOIDLabel, aIDLabel, campaignLabel, companyLabel, 
-	phoneLabel, includedOnOFLabel, submittedAsLabel, 
-	passedTypeLabel, incentiveValueLabel, coachingNotesLabel;
+	phoneLabel, submittedAsLabel, passedTypeLabel, 
+	incentiveValueLabel, coachingNotesLabel;
 	
 	private JTextField dialerField, agentField, 
 	cOIDField, aIDField, campaignField, companyField, 
 	phoneField, submittedAsField, passedTypeField, coachingNotesField;
 	
-	private JPanel includedOnOFButtons;
-	
-	private JRadioButton yesButton, noButton;
+	private JCheckBox includedOnOFCheckBox;
 	
 	private JSpinner incentiveValueSpinner;
 	
@@ -47,102 +46,113 @@ public class LeadForm extends JPanel{
 
 	/**
 	 * Helper method that initializes GUI Components.
+	 * All backgrounds are set to red, but not made opaque
+	 * until highlightError method is called, at which point,
+	 * components will be called and highlighted based on the
+	 * results of the validate method in the controller.
+	 * 
+	 * @See AddSingleLeadController
 	 */
 	public void initialize(){
-		setLayout(new FlowLayout());
+		setLayout(new GridLayout(4,4));
 		//try just adding all the components in willy-nilly first
 		//date
-		dateLabel = new JLabel("Date: \n(MM/dd/yyyy)");
+		dateLabel = new JLabel("Date: (MM/dd/yyyy)");
+		dateLabel.setBackground( new Color(255,75,75));
 		datePicker = new JXDatePicker();
-		JPanel datePanel = new JPanel();
+		JPanel datePanel = new JPanel(new GridLayout(2,1));
 		datePanel.add(dateLabel);
 		datePanel.add(datePicker);
 		
 		//dialer
-		dialerLabel = new JLabel("Dialer: \n(One char)");
+		dialerLabel = new JLabel("Dialer: (One char)");
+		dialerLabel.setBackground( new Color(255,75,75));
 		dialerField = new JTextField();
-		JPanel dialerPanel = new JPanel();
+		JPanel dialerPanel = new JPanel(new GridLayout(2,1));
 		dialerPanel.add(dialerLabel);
 		dialerPanel.add(dialerField);
 		
 		//agent
-		agentLabel = new JLabel("Agent: \n(<= 100 chars)");
+		agentLabel = new JLabel("Agent: (<= 100 chars)");
+		agentLabel.setBackground( new Color(255,75,75));
 		agentField = new JTextField();
-		JPanel agentPanel = new JPanel();
+		JPanel agentPanel = new JPanel(new GridLayout(2,1));
 		agentPanel.add(agentLabel);
 		agentPanel.add(agentField);
 		
 		//coid
-		cOIDLabel = new JLabel("COID: \n(<= 100 chars)");
+		cOIDLabel = new JLabel("COID: (<= 100 chars)");
+		cOIDLabel.setBackground( new Color(255,75,75));
 		cOIDField = new JTextField();
-		JPanel cOIDPanel = new JPanel();
+		JPanel cOIDPanel = new JPanel(new GridLayout(2,1));
 		cOIDPanel.add(cOIDLabel);
 		cOIDPanel.add(cOIDField);
 		
 		//aid
-		aIDLabel = new JLabel("AID: \n(<= 100 chars)");
+		aIDLabel = new JLabel("AID: (<= 100 chars)");
+		aIDLabel.setBackground( new Color(255,75,75));
 		aIDField = new JTextField();
-		JPanel aIDPanel = new JPanel();
+		JPanel aIDPanel = new JPanel(new GridLayout(2,1));
 		aIDPanel.add(aIDLabel);
 		aIDPanel.add(aIDField);
 		
 		//campaign
-		campaignLabel = new JLabel("Campaign: \n(<= 100 chars)");
+		campaignLabel = new JLabel("Campaign: (<= 100 chars)");
+		campaignLabel.setBackground( new Color(255,75,75));
 		campaignField = new JTextField();
-		JPanel campaignPanel = new JPanel();
+		JPanel campaignPanel = new JPanel(new GridLayout(2,1));
 		campaignPanel.add(campaignLabel);
 		campaignPanel.add(campaignField);
 		
 		//company
-		companyLabel = new JLabel("Company: \n(<= 100 chars)");
+		companyLabel = new JLabel("Company: (<= 100 chars)");
+		companyLabel.setBackground( new Color(255,75,75));
 		companyField = new JTextField();
-		JPanel companyPanel = new JPanel();
+		JPanel companyPanel = new JPanel(new GridLayout(2,1));
 		companyPanel.add(companyLabel);
 		companyPanel.add(companyField);
 		
 		//phone
-		phoneLabel = new JLabel("Phone: \n(9-digits)");
+		phoneLabel = new JLabel("Phone: (9-digits)");
+		phoneLabel.setBackground( new Color(255,75,75));
 		phoneField = new JTextField();
-		JPanel phonePanel = new JPanel();
+		JPanel phonePanel = new JPanel(new GridLayout(2,1));
 		phonePanel.add(phoneLabel);
 		phonePanel.add(phoneField);
 		
 		//included on of
-		includedOnOFLabel = new JLabel("Included on Output File: "
-				+ "\n(Y for yes, N for No)");
-		yesButton = new JRadioButton("Y");
-		noButton = new JRadioButton("N");
-		includedOnOFButtons = new JPanel(new GridLayout(2,1));
-		includedOnOFButtons.add(yesButton);
-		includedOnOFButtons.add(noButton);
+		includedOnOFCheckBox = new JCheckBox("Included on Output File: "
+				+ "(Y for yes, N for No)");
+		includedOnOFCheckBox.setBackground( new Color(255,75,75));
 		
 		//submitted as
-		submittedAsLabel = new JLabel("Submitted As: \n(<= 100 chars)");
+		submittedAsLabel = new JLabel("Submitted As: (<= 100 chars)");
+		submittedAsLabel.setBackground( new Color(255,75,75));
 		submittedAsField = new JTextField();
-		JPanel submittedAsPanel = new JPanel();
+		JPanel submittedAsPanel = new JPanel(new GridLayout(2,1));
 		submittedAsPanel.add(submittedAsLabel);
 		submittedAsPanel.add(submittedAsField);
 		
 		//passed type
-		passedTypeLabel = new JLabel("Passed Type: \n(<= 100 chars)");
+		passedTypeLabel = new JLabel("Passed Type: (<= 100 chars)");
 		passedTypeField = new JTextField();
-		JPanel passedTypePanel = new JPanel();
+		JPanel passedTypePanel = new JPanel(new GridLayout(2,1));
 		passedTypePanel.add(passedTypeLabel);
 		passedTypePanel.add(passedTypeField);
 		
 		//incentive value
-		incentiveValueLabel = new JLabel("Incentive Value: \n(In USD)");
+		incentiveValueLabel = new JLabel("Incentive Value: (In USD)");
 		SpinnerModel model = 
 				new SpinnerNumberModel(0,0, Double.MAX_VALUE, .01);
 		incentiveValueSpinner = new JSpinner(model);
-		JPanel incentiveValuePanel = new JPanel();
+		JPanel incentiveValuePanel = new JPanel(new GridLayout(2,1));
 		incentiveValuePanel.add(incentiveValueLabel);
 		incentiveValuePanel.add(incentiveValueSpinner);
 		
 		//coaching notes
-		coachingNotesLabel = new JLabel("Coaching Notes: \n(<= 200 chars)");
+		coachingNotesLabel = new JLabel("Coaching Notes: (<= 200 chars)");
 		coachingNotesField = new JTextField();
-		JPanel coachingNotesPanel = new JPanel();
+		JPanel coachingNotesPanel = new JPanel(new GridLayout(2,1));
 		coachingNotesPanel.add(coachingNotesLabel);
 		coachingNotesPanel.add(coachingNotesField);
 		
@@ -155,11 +165,13 @@ public class LeadForm extends JPanel{
 		add(campaignPanel);
 		add(companyPanel);
 		add(phonePanel);
-		add(includedOnOFButtons);
+		add(includedOnOFCheckBox);
 		add(submittedAsPanel);
 		add(passedTypePanel);
 		add(incentiveValuePanel);
 		add(coachingNotesPanel);
+		
+		
 	}
 	
 	public JLabel getDateLabel() {
@@ -224,14 +236,6 @@ public class LeadForm extends JPanel{
 
 	public void setPhoneLabel(JLabel phoneLabel) {
 		this.phoneLabel = phoneLabel;
-	}
-
-	public JLabel getIncludedOnOFLabel() {
-		return includedOnOFLabel;
-	}
-
-	public void setIncludedOnOFLabel(JLabel includedOnOFLabel) {
-		this.includedOnOFLabel = includedOnOFLabel;
 	}
 
 	public JLabel getSubmittedAsLabel() {
@@ -376,30 +380,6 @@ public class LeadForm extends JPanel{
 
 	public void setCoachingNotesField(JTextField coachingNotesField) {
 		this.coachingNotesField = coachingNotesField;
-	}
-
-	public JPanel getIncludedOnOFButtons() {
-		return includedOnOFButtons;
-	}
-
-	public void setIncludedOnOFButtons(JPanel includedOnOFButtons) {
-		this.includedOnOFButtons = includedOnOFButtons;
-	}
-
-	public JRadioButton getYesButton() {
-		return yesButton;
-	}
-
-	public void setYesButton(JRadioButton yesButton) {
-		this.yesButton = yesButton;
-	}
-
-	public JRadioButton getNoButton() {
-		return noButton;
-	}
-
-	public void setNoButton(JRadioButton noButton) {
-		this.noButton = noButton;
 	}
 
 	public JSpinner getIncentiveValueSpinner() {
