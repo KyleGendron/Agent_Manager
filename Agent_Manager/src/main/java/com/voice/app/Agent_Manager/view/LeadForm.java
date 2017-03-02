@@ -5,9 +5,11 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
@@ -57,7 +59,7 @@ public class LeadForm extends JPanel{
 		setLayout(new GridLayout(4,4));
 		//try just adding all the components in willy-nilly first
 		//date
-		dateLabel = new JLabel("Date: (MM/dd/yyyy)");
+		dateLabel = new JLabel("Date*: (MM/dd/yyyy)");
 		dateLabel.setBackground( new Color(255,75,75));
 		datePicker = new JXDatePicker();
 		JPanel datePanel = new JPanel(new GridLayout(2,1));
@@ -65,7 +67,7 @@ public class LeadForm extends JPanel{
 		datePanel.add(datePicker);
 		
 		//dialer
-		dialerLabel = new JLabel("Dialer: (One char)");
+		dialerLabel = new JLabel("Dialer*: (One char)");
 		dialerLabel.setBackground( new Color(255,75,75));
 		dialerField = new JTextField();
 		JPanel dialerPanel = new JPanel(new GridLayout(2,1));
@@ -73,7 +75,7 @@ public class LeadForm extends JPanel{
 		dialerPanel.add(dialerField);
 		
 		//agent
-		agentLabel = new JLabel("Agent: (<= 100 chars)");
+		agentLabel = new JLabel("Agent*: (<= 100 chars)");
 		agentLabel.setBackground( new Color(255,75,75));
 		agentField = new JTextField();
 		JPanel agentPanel = new JPanel(new GridLayout(2,1));
@@ -97,7 +99,7 @@ public class LeadForm extends JPanel{
 		aIDPanel.add(aIDField);
 		
 		//campaign
-		campaignLabel = new JLabel("Campaign: (<= 100 chars)");
+		campaignLabel = new JLabel("Campaign*: (<= 100 chars)");
 		campaignLabel.setBackground( new Color(255,75,75));
 		campaignField = new JTextField();
 		JPanel campaignPanel = new JPanel(new GridLayout(2,1));
@@ -105,7 +107,7 @@ public class LeadForm extends JPanel{
 		campaignPanel.add(campaignField);
 		
 		//company
-		companyLabel = new JLabel("Company: (<= 100 chars)");
+		companyLabel = new JLabel("Company*: (<= 100 chars)");
 		companyLabel.setBackground( new Color(255,75,75));
 		companyField = new JTextField();
 		JPanel companyPanel = new JPanel(new GridLayout(2,1));
@@ -113,7 +115,7 @@ public class LeadForm extends JPanel{
 		companyPanel.add(companyField);
 		
 		//phone
-		phoneLabel = new JLabel("Phone: (9-digits)");
+		phoneLabel = new JLabel("Phone*: (>= 10-digits)");
 		phoneLabel.setBackground( new Color(255,75,75));
 		phoneField = new JTextField();
 		JPanel phonePanel = new JPanel(new GridLayout(2,1));
@@ -121,12 +123,12 @@ public class LeadForm extends JPanel{
 		phonePanel.add(phoneField);
 		
 		//included on of
-		includedOnOFCheckBox = new JCheckBox("Included on Output File: "
-				+ "(Y for yes, N for No)");
+		includedOnOFCheckBox = new JCheckBox("Included on Output File*: (No if left blank)");
+		includedOnOFCheckBox.setOpaque(false);
 		includedOnOFCheckBox.setBackground( new Color(255,75,75));
 		
 		//submitted as
-		submittedAsLabel = new JLabel("Submitted As: (<= 100 chars)");
+		submittedAsLabel = new JLabel("Submitted As*: (<= 100 chars)");
 		submittedAsLabel.setBackground( new Color(255,75,75));
 		submittedAsField = new JTextField();
 		JPanel submittedAsPanel = new JPanel(new GridLayout(2,1));
@@ -134,27 +136,37 @@ public class LeadForm extends JPanel{
 		submittedAsPanel.add(submittedAsField);
 		
 		//passed type
-		passedTypeLabel = new JLabel("Passed Type: (<= 100 chars)");
+		passedTypeLabel = new JLabel("Passed Type*: (<= 100 chars)");
+		passedTypeLabel.setBackground( new Color(255,75,75));
 		passedTypeField = new JTextField();
 		JPanel passedTypePanel = new JPanel(new GridLayout(2,1));
 		passedTypePanel.add(passedTypeLabel);
 		passedTypePanel.add(passedTypeField);
 		
 		//incentive value
-		incentiveValueLabel = new JLabel("Incentive Value: (In USD)");
+		incentiveValueLabel = new JLabel("Incentive Value*: (In USD)");
+		incentiveValueLabel.setBackground( new Color(255,75,75));
 		SpinnerModel model = 
-				new SpinnerNumberModel(0,0, Double.MAX_VALUE, .01);
+				new SpinnerNumberModel(0,0, Double.MAX_VALUE, .25);
 		incentiveValueSpinner = new JSpinner(model);
+		((JSpinner.DefaultEditor) incentiveValueSpinner.getEditor()).getTextField().setEditable(false);
 		JPanel incentiveValuePanel = new JPanel(new GridLayout(2,1));
 		incentiveValuePanel.add(incentiveValueLabel);
 		incentiveValuePanel.add(incentiveValueSpinner);
 		
 		//coaching notes
 		coachingNotesLabel = new JLabel("Coaching Notes: (<= 200 chars)");
+		coachingNotesLabel.setBackground( new Color(255,75,75));
 		coachingNotesField = new JTextField();
 		JPanel coachingNotesPanel = new JPanel(new GridLayout(2,1));
 		coachingNotesPanel.add(coachingNotesLabel);
 		coachingNotesPanel.add(coachingNotesField);
+		
+		//info field
+		JTextArea info = new JTextArea("Any field marked with a '*' is a required field, "
+				+ "and must be filled out in order to be submitted.");
+		info.setEditable(false);
+		info.setLineWrap(true);
 		
 		//add each panel
 		add(datePanel);
@@ -170,8 +182,7 @@ public class LeadForm extends JPanel{
 		add(passedTypePanel);
 		add(incentiveValuePanel);
 		add(coachingNotesPanel);
-		
-		
+		add(info);
 	}
 	
 	public JLabel getDateLabel() {
@@ -268,10 +279,6 @@ public class LeadForm extends JPanel{
 
 	public void setCoachingNotesLabel(JLabel coachingNotesLabel) {
 		this.coachingNotesLabel = coachingNotesLabel;
-	}
-
-	public JTextField getDialerfield() {
-		return dialerField;
 	}
 
 	public void setDialerfield(JTextField dialerField) {
@@ -388,5 +395,35 @@ public class LeadForm extends JPanel{
 
 	public void setIncentiveValueSpinner(JSpinner incentiveValueSpinner) {
 		this.incentiveValueSpinner = incentiveValueSpinner;
+	}
+	
+	/**
+	 * Sets a components background to opaque,
+	 * used to highlight an error in the form.
+	 * @param component the component to highlight
+	 */
+	public void highlightError(JComponent component){
+		component.setOpaque(true);
+		repaint();
+	}
+	
+	/**
+	 * Sets a components background to not opaque,
+	 * used to un-highlight an error in the form.
+	 * @param component the component to un-highlight
+	 */
+	public void unHighlightErrors(){
+		dateLabel.setOpaque(false);
+		dialerLabel.setOpaque(false);
+		agentLabel.setOpaque(false);
+		cOIDLabel.setOpaque(false);
+		aIDLabel.setOpaque(false);
+		campaignLabel.setOpaque(false);
+		companyLabel.setOpaque(false);
+		phoneLabel.setOpaque(false);
+		submittedAsLabel.setOpaque(false);
+		passedTypeLabel.setOpaque(false);
+		incentiveValueLabel.setOpaque(false);
+		coachingNotesLabel.setOpaque(false);
 	}
 }
