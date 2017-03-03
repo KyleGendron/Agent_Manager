@@ -3,6 +3,8 @@ package com.voice.app.Agent_Manager.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
@@ -115,7 +117,7 @@ public class LeadForm extends JPanel{
 		companyPanel.add(companyField);
 		
 		//phone
-		phoneLabel = new JLabel("Phone*: (>= 10-digits)");
+		phoneLabel = new JLabel("Phone*: (Exactly 10-digits)");
 		phoneLabel.setBackground( new Color(255,75,75));
 		phoneField = new JTextField();
 		JPanel phonePanel = new JPanel(new GridLayout(2,1));
@@ -149,7 +151,7 @@ public class LeadForm extends JPanel{
 		SpinnerModel model = 
 				new SpinnerNumberModel(0,0, Double.MAX_VALUE, .25);
 		incentiveValueSpinner = new JSpinner(model);
-		((JSpinner.DefaultEditor) incentiveValueSpinner.getEditor()).getTextField().setEditable(false);
+		//((JSpinner.DefaultEditor) incentiveValueSpinner.getEditor()).getTextField().setEditable(false);
 		JPanel incentiveValuePanel = new JPanel(new GridLayout(2,1));
 		incentiveValuePanel.add(incentiveValueLabel);
 		incentiveValuePanel.add(incentiveValueSpinner);
@@ -333,14 +335,6 @@ public class LeadForm extends JPanel{
 		this.phoneField = phoneField;
 	}
 
-	public JTextField getCoachingField() {
-		return coachingNotesField;
-	}
-
-	public void setCoachingField(JTextField coachingField) {
-		this.coachingNotesField = coachingField;
-	}
-
 	public JSpinner getIncentiveSpinner() {
 		return incentiveValueSpinner;
 	}
@@ -425,5 +419,40 @@ public class LeadForm extends JPanel{
 		passedTypeLabel.setOpaque(false);
 		incentiveValueLabel.setOpaque(false);
 		coachingNotesLabel.setOpaque(false);
+		repaint();
+	}
+
+	public JCheckBox getIncludedOnOFCheckBox() {
+		return includedOnOFCheckBox;
+	}
+
+	public void setIncludedOnOFCheckBox(JCheckBox includedOnOFCheckBox) {
+		this.includedOnOFCheckBox = includedOnOFCheckBox;
+	}
+	
+	@Override
+	public String toString(){
+		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+		String formattedDate = format.format(datePicker.getDate());
+		String formattedIncludedOnOF;
+		if(includedOnOFCheckBox.isSelected())
+			formattedIncludedOnOF = "Yes";
+		else
+			formattedIncludedOnOF = "No";
+		NumberFormat formatter = NumberFormat.getCurrencyInstance();
+		String formattedIncentiveValue = formatter.format((Double)(incentiveValueSpinner.getValue()));
+		return "Date: " + formattedDate + 
+				"\nDialer: " + dialerField.getText() + 
+				"\nAgent: " + agentField.getText() +
+				"\nCOID: " + cOIDField.getText() +
+				"\nAID: " + aIDField.getText() +
+				"\nCampaign: " + campaignField.getText() +
+				"\nCompany: " + companyField.getText() +
+				"\nPhone: " + phoneField.getText() +
+				"\nIncluded On Output File: " + formattedIncludedOnOF +
+				"\nSubmitted As: " + submittedAsField.getText() +
+				"\nPassed Type: " + passedTypeField.getText() +
+				"\nIncentive Value: " + formattedIncentiveValue +
+				"\nCoaching Notes: " + coachingNotesField.getText();
 	}
 }

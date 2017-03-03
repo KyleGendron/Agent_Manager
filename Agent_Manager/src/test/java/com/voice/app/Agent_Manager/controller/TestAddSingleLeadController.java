@@ -101,6 +101,7 @@ public class TestAddSingleLeadController {
 
 	@Test
 	public void testValidateAllBadForm(){
+		System.out.println(AddSingleLeadController.validate(allBadForm));
 		assertEquals("Did not catch all the erroneous fields.", "There were some issues with your submission: \n"+ 
 				"-Future Date Provided.\n"+
 				"-Dialer was more than one character.\n"+
@@ -109,7 +110,7 @@ public class TestAddSingleLeadController {
 				"-Provided AID too long.\n"+
 				"-Provided Campaign name too long.\n"+
 				"-Provided Company name too long.\n"+
-				"-Provided Phone number too long.\n"+
+				"-Provided Phone number too long or short.\n"+
 				"-Provided Submitted As lead type too long.\n"+
 				"-Provided Passed Type for lead too long.\n"+
 				"-Provided Coaching Notes too long.\n",

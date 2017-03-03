@@ -1,5 +1,7 @@
 package com.voice.app.Agent_Manager.domain.concrete;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -10,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.voice.app.Agent_Manager.view.LeadForm;
 
 /**
  * Class that represents a lead record as submitted by an agent
@@ -100,6 +104,35 @@ public class LeadRecord{
 			coachingNotes = input[12];
 		else
 			coachingNotes = "";
+	}
+	
+	/**
+	 * Constructor that takes in LeadForm,
+	 * used primarily for manual lead inputs.
+	 * 
+	 * Expects that input has already been validated.
+	 * @param form the form to create the lead with
+	 */
+	public LeadRecord(LeadForm form){
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+		String date = df.format(form.getDatePicker().getDate());
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/y");
+		this.date = LocalDate.parse(date, formatter);
+		this.dialer = form.getDialerField().getText();
+		this.agent = form.getAgentField().getText();
+		this.cOID = form.getcOIDField().getText();
+		this.aID = form.getaIDField().getText();
+		this.campaign = form.getCampaignField().getText();
+		this.company = form.getCompanyField().getText();
+		this.phone = form.getPhoneField().getText();
+		if(form.getIncludedOnOFCheckBox().isSelected())
+			includedOnOF = true;
+		else
+			includedOnOF = false;
+		this.submittedAs = form.getSubmittedAsField().getText();
+		this.passedType = form.getPassedTypeField().getText();
+		this.incentiveValue = (Double) form.getIncentiveSpinner().getValue();
+		this.coachingNotes = form.getCoachingNotesField().getText();
 	}
 	
 	/**
@@ -319,4 +352,20 @@ public class LeadRecord{
 		this.id = id;
 	}
 	
+	@Override
+	public String toString(){
+		return "Date: " + date.toString() +
+				"\nDialer: " + dialer +
+				"\nAgent: " + agent + 
+				"\nCOID: " + cOID +
+				"\nAID: " + aID + 
+				"\nCampaign: " + campaign +
+				"\nCompany: " + company +
+				"\nPhone: " + phone +
+				"\nIncluded On Output File: " + includedOnOF +
+				"\nSubmitted As: " + submittedAs + 
+				"\nPassed Type: " + passedType +
+				"\nIncentive Value: " + incentiveValue +
+				"\nCoaching Notes: " + coachingNotes;
+	}
 }

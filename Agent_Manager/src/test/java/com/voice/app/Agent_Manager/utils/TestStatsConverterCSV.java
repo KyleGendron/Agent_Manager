@@ -17,7 +17,6 @@ public class TestStatsConverterCSV {
 	public void testProcess(){
 		StatsConverterCSV converter = new StatsConverterCSV(file);
 		ArrayList<StatsRecord> result = converter.process();
-		System.out.println(result.size());
 		assertEquals("The converter did not process all the records.", 703, result.size());
 	}
 	

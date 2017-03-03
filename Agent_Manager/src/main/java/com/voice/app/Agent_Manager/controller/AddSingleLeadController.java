@@ -6,6 +6,8 @@ import java.util.Date;
 
 import javax.swing.JOptionPane;
 
+import com.voice.app.Agent_Manager.dao.factory.DAOFactory;
+import com.voice.app.Agent_Manager.domain.concrete.LeadRecord;
 import com.voice.app.Agent_Manager.view.AddSingleLeadView;
 import com.voice.app.Agent_Manager.view.LeadForm;
 import com.voice.app.Agent_Manager.view.MainMenuView;
@@ -17,29 +19,42 @@ import com.voice.app.Agent_Manager.view.MainMenuView;
  *
  */
 public class AddSingleLeadController implements ActionListener{
-	private MainMenuView mainView;
+	private MainMenuController controller;
 	private AddSingleLeadView view;
+	private DAOFactory daoFactory;
 
 	/**
 	 * Default Constructor
 	 */
-	public AddSingleLeadController(MainMenuView mainView){
+	public AddSingleLeadController(MainMenuController controller, DAOFactory daoFactory){
 		view = new AddSingleLeadView(this);
-		this.mainView = mainView;
+		this.controller = controller;
+		this.daoFactory = daoFactory;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch(e.getActionCommand()){
 		case "Cancel":
-			mainView.removeTab();
+			controller.getView().removeTab();
 			break;
 		case "Submit":
 			view.getForm().unHighlightErrors(); //refresh error highlights
 			String response = validate(view.getForm());
-			if(response == null)
-				JOptionPane.showMessageDialog(view, "Submission Valid!");
-			else
+			if(response == null){
+				int reply = JOptionPane.showConfirmDialog(view, 
+						"Submission Valid!  Is this info correct?\n\n" +
+						view.getForm().toString() + 
+						"\n\nClick Yes to add to database or No to "
+						+ "continue to edit this record.",
+						"Confirm Submission",
+						JOptionPane.YES_NO_OPTION);
+				if(reply == JOptionPane.YES_OPTION){
+					LeadRecord lead = new LeadRecord(view.getForm());
+					daoFactory.getLeadDAO().add(0, lead);
+					controller.getView().removeTab();
+				}
+			}else
 				JOptionPane.showMessageDialog(view, response);
 			break;
 		}
@@ -154,10 +169,16 @@ public class AddSingleLeadController implements ActionListener{
 			response.append("-No Phone number was provided.\n");
 			result = false;
 		}else{
-			if(form.getPhoneField().getText().length() > 10){
+			if(form.getPhoneField().getText().length() != 10){
 				form.highlightError(form.getPhoneLabel());
-				response.append("-Provided Phone number too long.\n");
+				response.append("-Provided Phone number too long or short.\n");
 				result = false;
+			}else{
+				if(!confirmPhone(form.getPhoneField().getText())){
+					form.highlightError(form.getPhoneLabel());
+					response.append("-Provided Phone number not formatted correctly.\n");
+					result = false;
+				}
 			}
 		}
 
@@ -198,5 +219,19 @@ public class AddSingleLeadController implements ActionListener{
 			return null;
 		else
 			return response.toString();
+	}
+	
+	/**
+	 * Helper method that confirms whether the
+	 * give string is a phone number that is
+	 * nothing but digits.
+	 * @param text the text to be examined
+	 * @return whether the text is a digit-only phone number
+	 */
+	public static boolean confirmPhone(String text){
+		if(text.matches("[0-9]{10}"))
+			return true;
+		else
+			return false;
 	}
 }
