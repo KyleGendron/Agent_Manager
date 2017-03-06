@@ -1,33 +1,30 @@
 package com.voice.app.Agent_Manager.view;
 
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import com.voice.app.Agent_Manager.controller.AddSingleLeadController;
+import com.voice.app.Agent_Manager.controller.AddSingleStatsController;
 
 /**
- * Represents the view when performing the 
- * "Add Lead Manually" use case.
+ * View Class representing the GUI elements
+ * of the add single stats record use case.
  * @author Kyle Gendron
  *
  */
-@SuppressWarnings("serial")
-public class AddSingleLeadView extends JPanel{
-	private AddSingleLeadController controller;
-	private LeadForm form;
+public class AddSingleStatsView extends JPanel{
+	AddSingleStatsController controller;
+	StatsForm form;
 	
 	/**
 	 * 1-Param Constructor
-	 * @param controller the controller to associate with this view
+	 * @param controller the controller associated with this view
 	 */
-	public AddSingleLeadView(AddSingleLeadController controller){
+	public AddSingleStatsView(AddSingleStatsController controller){
 		this.controller = controller;
 		initialize();
 	}
@@ -62,7 +59,7 @@ public class AddSingleLeadView extends JPanel{
 		submitButtonConstraints.anchor = GridBagConstraints.PAGE_START;
 		add(submitButton, submitButtonConstraints);
 		
-		form = new LeadForm();
+		form = new StatsForm();
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.add(form);
 		GridBagConstraints formConstraints = new GridBagConstraints();
@@ -73,11 +70,15 @@ public class AddSingleLeadView extends JPanel{
 		formConstraints.gridheight = 1;
 		formConstraints.gridwidth = 2;
 		formConstraints.anchor = GridBagConstraints.CENTER;
-		formConstraints.insets = new Insets(0, 40, 0, 40);
+		formConstraints.insets = new Insets(0, 60, 0, 60);
 		add(form, formConstraints);
 	}
 	
-	public LeadForm getForm(){
+	/**
+	 * Returns the form within this panel.
+	 * @return form the form nested within this panel
+	 */
+	public StatsForm getForm(){
 		return form;
 	}
 }

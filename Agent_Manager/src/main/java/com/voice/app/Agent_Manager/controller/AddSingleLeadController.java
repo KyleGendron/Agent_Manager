@@ -58,7 +58,6 @@ public class AddSingleLeadController implements ActionListener{
 				JOptionPane.showMessageDialog(view, response);
 			break;
 		}
-
 	}
 
 	/**

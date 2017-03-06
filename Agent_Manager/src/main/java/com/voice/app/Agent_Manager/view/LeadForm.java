@@ -2,6 +2,7 @@ package com.voice.app.Agent_Manager.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -59,7 +60,7 @@ public class LeadForm extends JPanel{
 	 */
 	public void initialize(){
 		setLayout(new GridLayout(4,4));
-		//try just adding all the components in willy-nilly first
+		
 		//date
 		dateLabel = new JLabel("Date*: (MM/dd/yyyy)");
 		dateLabel.setBackground( new Color(255,75,75));
@@ -151,7 +152,6 @@ public class LeadForm extends JPanel{
 		SpinnerModel model = 
 				new SpinnerNumberModel(0,0, Double.MAX_VALUE, .25);
 		incentiveValueSpinner = new JSpinner(model);
-		//((JSpinner.DefaultEditor) incentiveValueSpinner.getEditor()).getTextField().setEditable(false);
 		JPanel incentiveValuePanel = new JPanel(new GridLayout(2,1));
 		incentiveValuePanel.add(incentiveValueLabel);
 		incentiveValuePanel.add(incentiveValueSpinner);
@@ -167,6 +167,8 @@ public class LeadForm extends JPanel{
 		//info field
 		JTextArea info = new JTextArea("Any field marked with a '*' is a required field, "
 				+ "and must be filled out in order to be submitted.");
+		Font font = info.getFont();
+		info.setFont(font.deriveFont(Font.BOLD));
 		info.setEditable(false);
 		info.setLineWrap(true);
 		
@@ -402,9 +404,8 @@ public class LeadForm extends JPanel{
 	}
 	
 	/**
-	 * Sets a components background to not opaque,
-	 * used to un-highlight an error in the form.
-	 * @param component the component to un-highlight
+	 * Sets all components' backgrounds to not opaque,
+	 * used to un-highlight all errors in the form.
 	 */
 	public void unHighlightErrors(){
 		dateLabel.setOpaque(false);
