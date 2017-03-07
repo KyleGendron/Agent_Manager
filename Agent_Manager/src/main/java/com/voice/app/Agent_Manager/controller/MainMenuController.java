@@ -79,7 +79,7 @@ public class MainMenuController implements ActionListener{
 			}
 			break;
 		case "Add Stats Manually":
-			AddSingleStatsController singleStatsController = new AddSingleStatsController(this);
+			AddSingleStatsController singleStatsController = new AddSingleStatsController(this, daoFactory);
 			view.addTab("Add Stats", singleStatsController.getView());
 			break;
 		case "Display All Lead Records":

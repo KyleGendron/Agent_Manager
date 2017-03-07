@@ -48,10 +48,7 @@ public class StatsForm extends JPanel{
 	 */
 	public void initialize(){
 		setLayout(new GridLayout(3,5));
-		SpinnerModel doubleModel = 
-				new SpinnerNumberModel(0,0, Double.MAX_VALUE, .01);
-		SpinnerModel intModel = 
-				new SpinnerNumberModel(0,0, Integer.MAX_VALUE, 1);
+		
 		//date
 		dateLabel = new JLabel("Date*: (MM/dd/yyyy)");
 		dateLabel.setBackground( new Color(255,75,75));
@@ -78,77 +75,77 @@ public class StatsForm extends JPanel{
 		
 		//logged hours
 		loggedHoursLabel = new JLabel("Logged Hours*: ");
-		loggedHoursSpinner = new JSpinner(doubleModel);
+		loggedHoursSpinner = new JSpinner(new SpinnerNumberModel(0,0, Double.MAX_VALUE, .01));
 		JPanel loggedHoursPanel = new JPanel(new GridLayout(2,1));
 		loggedHoursPanel.add(loggedHoursLabel);
 		loggedHoursPanel.add(loggedHoursSpinner);
 		
 		//break hours
 		breakHoursLabel = new JLabel("Break Hours*: ");
-		breakHoursSpinner = new JSpinner(doubleModel);
+		breakHoursSpinner = new JSpinner(new SpinnerNumberModel(0,0, Double.MAX_VALUE, .01));
 		JPanel breakHoursPanel = new JPanel(new GridLayout(2,1));
 		breakHoursPanel.add(breakHoursLabel);
 		breakHoursPanel.add(breakHoursSpinner);
 		
 		//follow-up hours
 		followupHoursLabel = new JLabel("Follow-Up Hours*: ");
-		followupHoursSpinner = new JSpinner(doubleModel);
+		followupHoursSpinner = new JSpinner(new SpinnerNumberModel(0,0, Double.MAX_VALUE, .01));
 		JPanel followupHoursPanel = new JPanel(new GridLayout(2,1));
 		followupHoursPanel.add(followupHoursLabel);
 		followupHoursPanel.add(followupHoursSpinner);
 		
 		//meeting/training hours
 		meetTrainHoursLabel = new JLabel("Meeting + Training Hours*: ");
-		meetTrainHoursSpinner = new JSpinner(doubleModel);
+		meetTrainHoursSpinner = new JSpinner(new SpinnerNumberModel(0,0, Double.MAX_VALUE, .01));
 		JPanel meetTrainHoursPanel = new JPanel(new GridLayout(2,1));
 		meetTrainHoursPanel.add(meetTrainHoursLabel);
 		meetTrainHoursPanel.add(meetTrainHoursSpinner);
 		
 		//hours minus excess break
 		hoursMinusExcessBreakLabel = new JLabel("Hours Minus Excess Break*: ");
-		hoursMinusExcessBreakSpinner = new JSpinner(doubleModel);
+		hoursMinusExcessBreakSpinner = new JSpinner(new SpinnerNumberModel(0,0, Double.MAX_VALUE, .01));
 		JPanel hoursMinusExcessBreakPanel = new JPanel(new GridLayout(2,1));
 		hoursMinusExcessBreakPanel.add(hoursMinusExcessBreakLabel);
 		hoursMinusExcessBreakPanel.add(hoursMinusExcessBreakSpinner);
 		
 		//calls made
 		callsMadeLabel = new JLabel("Calls Made*: ");
-		callsMadeSpinner = new JSpinner(intModel);
+		callsMadeSpinner = new JSpinner(new SpinnerNumberModel(0,0, Integer.MAX_VALUE, 1));
 		JPanel callsMadePanel = new JPanel(new GridLayout(2,1));
 		callsMadePanel.add(callsMadeLabel);
 		callsMadePanel.add(callsMadeSpinner);
 		
 		//calls per hour
 		callsPerHourLabel = new JLabel("Calls Per Hour*: ");
-		callsPerHourSpinner = new JSpinner(doubleModel);
+		callsPerHourSpinner = new JSpinner(new SpinnerNumberModel(0,0, Double.MAX_VALUE, .01));
 		JPanel callsPerHourPanel = new JPanel(new GridLayout(2,1));
 		callsPerHourPanel.add(callsPerHourLabel);
 		callsPerHourPanel.add(callsPerHourSpinner);
 		
 		//contacts
 		contactsLabel = new JLabel("Contacts*: ");
-		contactsSpinner = new JSpinner(intModel);
+		contactsSpinner = new JSpinner(new SpinnerNumberModel(0,0, Integer.MAX_VALUE, 1));
 		JPanel contactsPanel = new JPanel(new GridLayout(2,1));
 		contactsPanel.add(contactsLabel);
 		contactsPanel.add(contactsSpinner);
 		
 		//contacts per hour
 		contactsPerHourLabel = new JLabel("Contacts Per Hour*: ");
-		contactsPerHourSpinner = new JSpinner(doubleModel);
+		contactsPerHourSpinner = new JSpinner(new SpinnerNumberModel(0,0, Double.MAX_VALUE, .01));
 		JPanel contactsPerHourPanel = new JPanel(new GridLayout(2,1));
 		contactsPerHourPanel.add(contactsPerHourLabel);
 		contactsPerHourPanel.add(contactsPerHourSpinner);
 		
 		//leads per hour
 		leadsPerHourLabel = new JLabel("Leads Per Hour*: ");
-		leadsPerHourSpinner = new JSpinner(doubleModel);
+		leadsPerHourSpinner = new JSpinner(new SpinnerNumberModel(0,0, Double.MAX_VALUE, .01));
 		JPanel leadsPerHourPanel = new JPanel(new GridLayout(2,1));
 		leadsPerHourPanel.add(leadsPerHourLabel);
 		leadsPerHourPanel.add(leadsPerHourSpinner);
 		
 		//follow-up minutes per lead
 		followupMinutesPerLeadLabel = new JLabel("Follow-Up Minutes Per Lead*: ");
-		followupMinutesPerLeadSpinner = new JSpinner(doubleModel);
+		followupMinutesPerLeadSpinner = new JSpinner(new SpinnerNumberModel(0,0, Double.MAX_VALUE, .01));
 		JPanel followupMinutesPerLeadPanel = new JPanel(new GridLayout(2,1));
 		followupMinutesPerLeadPanel.add(followupMinutesPerLeadLabel);
 		followupMinutesPerLeadPanel.add(followupMinutesPerLeadSpinner);

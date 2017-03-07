@@ -1,5 +1,8 @@
 package com.voice.app.Agent_Manager.domain.concrete;
 
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -10,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.voice.app.Agent_Manager.view.StatsForm;
 
 /**
  * Class that represents a stats entry for an agent on a given day.
@@ -96,6 +101,32 @@ public class StatsRecord{
 		contactsPerHour = Double.parseDouble(input[11]);
 		leadsPerHour = Double.parseDouble(input[12]);
 		followUpMinutesPerLead = Double.parseDouble(input[13]);
+	}
+	
+	/**
+	 * 1-Param Constructor takes in a StatsForm
+	 * containing the data points stored by this 
+	 * class.  To be used with manual input
+	 * @param input StatsForm of input data points
+	 */
+	public StatsRecord(StatsForm form){
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+		String date = df.format(form.getDatePicker().getDate());
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/y");
+		this.date = LocalDate.parse(date, formatter);
+		agent = form.getAgentField().getText();
+		campaign = form.getCampaignField().getText();
+		loggedHours = (Double) form.getLoggedHoursSpinner().getValue();
+		breakHours = (Double) form.getBreakHoursSpinner().getValue();
+		followUpHours = (Double) form.getFollowupHoursSpinner().getValue();
+		meetTrainHours = (Double) form.getMeetTrainHoursSpinner().getValue();
+		hoursMinusExcessBreak = (Double) form.getHoursMinusExcessBreakSpinner().getValue();
+		callsMade = (Integer) form.getCallsMadeSpinner().getValue();
+		callsPerHour = (Double) form.getCallsPerHourSpinner().getValue();
+		contacts = (Integer) form.getContactsSpinner().getValue();
+		contactsPerHour = (Double) form.getContactsPerHourSpinner().getValue();
+		leadsPerHour = (Double) form.getLeadsPerHourSpinner().getValue();
+		followUpMinutesPerLead = (Double) form.getFollowupMinutesPerLeadSpinner().getValue();
 	}
 	
 	/**
@@ -357,6 +388,25 @@ public class StatsRecord{
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	@Override
+	public String toString(){
+		DecimalFormat df = new DecimalFormat( "#,###,###,##0.00" );
+		return "Date: " + date + 
+				"\nAgent: " + agent +
+				"\nCampaign: " + campaign +
+				"\nLogged Hours: " + df.format(loggedHours) +
+				"\nBreak Hours: " + df.format(breakHours) +
+				"\nFollow-Up Hours: " + df.format(followUpHours) +
+				"\nMeeting + Training Hours: " + df.format(meetTrainHours) +
+				"\nHours Minus Excess Break: " + df.format(hoursMinusExcessBreak) +
+				"\nCalls Made: " + callsMade +
+				"\nCalls Per Hour: " + df.format(callsPerHour) +
+				"\nContacts: " + contacts + 
+				"\nContacts Per Hour: " + df.format(contactsPerHour) +
+				"\nLeads Per Hour: " + df.format(leadsPerHour) +
+				"\nFollow-Up Minutes Per Lead: " + df.format(followUpMinutesPerLead);
 	}
 	
 }
