@@ -96,12 +96,12 @@ public class MainMenuView extends JFrame{
 		menu.addSeparator();
 		menu.add(displayAllLeads);
 		menu.add(displayAllStats);
-		menu.add(searchMenu);
 		menu.addSeparator();
 		menu.add(exit);
 		
 		//set this menu to the menubar
 		menuBar.add(menu);
+		menuBar.add(searchMenu);
 		this.setJMenuBar(menuBar);
 		
 		//add tabbed frame
