@@ -91,8 +91,8 @@ public class MainMenuController implements ActionListener{
 			view.addTab("All Stats", allStatsController.getView());
 			break;
 		case "Search All Lead Records":
-			System.out.println("Searching all Leads Records.");
-			//TODO
+			SearchLeadsController searchLeadsController = new SearchLeadsController(this, daoFactory);
+			view.addTab("Search Leads", searchLeadsController.getView());
 			break;
 		case "Search All Stats Records":
 			System.out.println("Searching all Stats Records.");
