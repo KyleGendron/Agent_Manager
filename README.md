@@ -4,4 +4,4 @@ Still in development.
 
 Somewhat over-designed to demonstrate use of MVC.
 
-## Current Status: Version 1.0 in Development (In Development)
+## Current Status: Version 1.0 in Development (Active Development)
