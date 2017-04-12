@@ -41,6 +41,13 @@ public interface ILeadRecordDAO<T> extends GenericDAO<Integer, T> {
    */
   @Override
   T find(Integer key);
+  
+  /**
+   * Return a list of distinct values of a given field
+   * @param fieldName the field to return distinct values for
+   * @return a list of distinct values from the given field
+   */
+  public List<String> getDistinctValues(String fieldName);
 
   /**
    * Generate a list of AntenatalVisits in the DAO repository

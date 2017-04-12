@@ -15,13 +15,13 @@ public class TestLeadRecordDAOHibernate {
 	//several copies created for use in different tests,
 	//in case tests aren't executed in order
 	private static LeadRecord addLead, findLead, removeLead,
-		listLead, updateLead;
+		listLead, updateLead, distinctLead;
 	private static String[] input = {"1/31/2017","F","John Doe","003A000000fZJzxIAG",
 			"001A000000W90b8IAB", "Q1 2017 Voice B2B Campaign",
 			"Blood and Guts OB/GYN","5556278924","x","Registered",
 			"Registered","$1.50","No notes in Five9."};
 	private static DAOFactoryHibernate factory = new DAOFactoryHibernate();
-	private static int addID, findID, listID, updateID;
+	private static int addID, findID, listID, updateID, distinctID;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -30,6 +30,7 @@ public class TestLeadRecordDAOHibernate {
 		removeLead = new LeadRecord(input);
 		listLead = new LeadRecord(input);
 		updateLead = new LeadRecord(input);
+		distinctLead = new LeadRecord(input);
 	}
 	
 	@Test
@@ -68,12 +69,19 @@ public class TestLeadRecordDAOHibernate {
 		assertEquals("Leadrecord not updated.", "Jane Doe", factory.getLeadDAO().find(updateID).getAgent());
 	}
 	
+	@Test
+	public void testGetDistinctValues(){
+		distinctID = factory.getLeadDAO().add(0, distinctLead);
+		assertTrue("No values were found.", !(factory.getLeadDAO().getDistinctValues("agent")).isEmpty());
+	}
+	
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		factory.getLeadDAO().remove(addID);
 		factory.getLeadDAO().remove(findID);
 		factory.getLeadDAO().remove(listID);
 		factory.getLeadDAO().remove(updateID);
+		factory.getLeadDAO().remove(distinctID);
 	}
 	
 }

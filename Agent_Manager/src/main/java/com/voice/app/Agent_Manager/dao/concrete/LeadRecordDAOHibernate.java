@@ -115,6 +115,29 @@ public class LeadRecordDAOHibernate implements ILeadRecordDAO<LeadRecord>{
 
 	//TODO: Implement another find method that takes in a string for query-builder
 	
+	/**
+	 * Returns all distinct string values of the given field in a list of that field's type.
+	 * @param fieldName the field to retrieve all distinct string values from
+	 * @return a list of string values that field refers to
+	 */
+	@Override
+	public List<String> getDistinctValues(String fieldName){
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try{
+			tx = session.beginTransaction();
+			TypedQuery<String> query = session.createQuery("SELECT distinct L." + fieldName
+															+ " FROM LeadRecord L");
+			return query.getResultList();
+		}catch (HibernateException e) {
+			if (tx!=null) tx.rollback();
+			e.printStackTrace(); 
+		}finally {
+			session.close(); 
+		}
+		return null;
+	}
+	
 	@Override
 	public List<LeadRecord> list() {
 		Session session = factory.openSession();

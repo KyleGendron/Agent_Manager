@@ -31,20 +31,20 @@ import com.voice.app.Agent_Manager.domain.concrete.LeadRecord;
 @SuppressWarnings("serial")
 public class SearchLeadsView extends JPanel{
 	private SearchLeadsController controller;
-	
+
 	private JXDatePicker startDatePicker, endDatePicker;
-	
+
 	private JLabel startDateLabel, endDateLabel;
-	
+
 	private JComboBox<String> dialerBox, agentBox, cOIDBox, aIDBox,
-		campaignBox, companyBox, phoneBox, includedOnOFBox,
-		submittedAsBox, passedTypeBox;
-	
+	campaignBox, companyBox, phoneBox,
+	submittedAsBox, passedTypeBox;
+
 	private JSpinner incentiveLowSpinner, incentiveHighSpinner;
-	
-	private JCheckBox enableDateCheckBox, enableIncentiveCheckBox;
-	
-	
+
+	private JCheckBox enableDateCheckBox, enableIncentiveCheckBox, includedOnOFCheckBox;
+
+
 	/**
 	 * Default Constructor
 	 */
@@ -67,7 +67,7 @@ public class SearchLeadsView extends JPanel{
 		closeButtonConstraints.weightx = 0.25;
 		closeButtonConstraints.weighty = 0.1;
 		add(closeButton, closeButtonConstraints);
-		
+
 		JButton searchButton = new JButton("Search");
 		searchButton.addActionListener(controller);
 		GridBagConstraints searchButtonConstraints = new GridBagConstraints();
@@ -76,14 +76,18 @@ public class SearchLeadsView extends JPanel{
 		searchButtonConstraints.weightx = 0.25;
 		searchButtonConstraints.weighty = 0.1;
 		add(searchButton, searchButtonConstraints);
-		
+
 		//add search criteria
-		JPanel searchCritPanel = new JPanel(new GridLayout(30,1));
-		
+		JPanel searchCritPanel = new JPanel(new GridLayout(31,1));
+
+		//reset button
+		JButton UpdateSearchOptionsButton = new JButton("Update Search Options");
+		UpdateSearchOptionsButton.addActionListener(controller);
+
 		//date enabler
 		enableDateCheckBox = new JCheckBox("Enable Date Range Search: ");
 		enableDateCheckBox.addChangeListener(controller);
-		
+
 		//date range
 		startDateLabel = new JLabel("Start Date: ");
 		startDateLabel.setBackground(new Color(255,75,75));
@@ -93,66 +97,67 @@ public class SearchLeadsView extends JPanel{
 		startDatePicker.setEnabled(false);
 		endDatePicker = new JXDatePicker();
 		endDatePicker.setEnabled(false);
-		
+
 		//dialer
 		JLabel dialerLabel = new JLabel("Dialer: ");
-		dialerBox = new JComboBox<String>();
-		
+		dialerBox = new JComboBox<String>(controller.getComboBoxElements("dialer"));
+
 		//agent
 		JLabel agentLabel = new JLabel("Agent: ");
-		agentBox = new JComboBox<String>();
-		
+		agentBox = new JComboBox<String>(controller.getComboBoxElements("agent"));
+
 		//coid
 		JLabel cOIDLabel = new JLabel("COID: ");
-		cOIDBox = new JComboBox<String>();
-		
+		cOIDBox = new JComboBox<String>(controller.getComboBoxElements("cOID"));
+
 		//aid
 		JLabel aIDLabel = new JLabel("AID: ");
-		aIDBox = new JComboBox<String>();
-		
+		aIDBox = new JComboBox<String>(controller.getComboBoxElements("aID"));
+
 		//campaign
 		JLabel campaignLabel = new JLabel("Campaign: ");
-		campaignBox = new JComboBox<String>();
-		
+		campaignBox = new JComboBox<String>(controller.getComboBoxElements("campaign"));
+
 		//company
 		JLabel companyLabel = new JLabel("Company: ");
-		companyBox = new JComboBox<String>();
-		
+		companyBox = new JComboBox<String>(controller.getComboBoxElements("company"));
+
 		//phone
 		JLabel phoneLabel = new JLabel("Phone: ");
-		phoneBox = new JComboBox<String>();
-		
+		phoneBox = new JComboBox<String>(controller.getComboBoxElements("phone"));
+
 		//include on output file
 		JLabel includedOnOFLabel = new JLabel("Included On Output File: ");
-		includedOnOFBox = new JComboBox<String>();
-		
+		includedOnOFCheckBox = new JCheckBox("Leave blank if no.");
+
 		//submitted as
 		JLabel submittedAsLabel = new JLabel("Submitted As: ");
-		submittedAsBox = new JComboBox<String>();
-		
+		submittedAsBox = new JComboBox<String>(controller.getComboBoxElements("submittedAs"));
+
 		//passed type
 		JLabel passedTypeLabel = new JLabel("Passed Type: ");
-		passedTypeBox = new JComboBox<String>();
-		
+		passedTypeBox = new JComboBox<String>(controller.getComboBoxElements("passedType"));
+
 		//whether to search by incentive value
 		enableIncentiveCheckBox = new JCheckBox("Enable Incentive Value Search Range: ");
 		enableIncentiveCheckBox.addChangeListener(controller);
-		
+
 		//incentive low
 		JLabel incentiveLowLabel = new JLabel("At Least: ");
 		SpinnerModel lowModel = 
 				new SpinnerNumberModel(0,0, 2000000000.0, .25);
 		incentiveLowSpinner = new JSpinner(lowModel);
 		incentiveLowSpinner.setEnabled(false);
-		
+
 		//incentive high
 		JLabel incentiveHighLabel = new JLabel("At Most: ");
 		SpinnerModel highModel = 
 				new SpinnerNumberModel(0,0, 2000000000.0, .25);
 		incentiveHighSpinner = new JSpinner(highModel);
 		incentiveHighSpinner.setEnabled(false);
-		
+
 		//add remaining criteria components
+		searchCritPanel.add(UpdateSearchOptionsButton);
 		searchCritPanel.add(enableDateCheckBox);
 		searchCritPanel.add(startDateLabel);
 		searchCritPanel.add(startDatePicker);
@@ -173,7 +178,7 @@ public class SearchLeadsView extends JPanel{
 		searchCritPanel.add(phoneLabel);
 		searchCritPanel.add(phoneBox);
 		searchCritPanel.add(includedOnOFLabel);
-		searchCritPanel.add(includedOnOFBox);
+		searchCritPanel.add(includedOnOFCheckBox);
 		searchCritPanel.add(submittedAsLabel);
 		searchCritPanel.add(submittedAsBox);
 		searchCritPanel.add(passedTypeLabel);
@@ -183,7 +188,7 @@ public class SearchLeadsView extends JPanel{
 		searchCritPanel.add(incentiveLowSpinner);
 		searchCritPanel.add(incentiveHighLabel);
 		searchCritPanel.add(incentiveHighSpinner);
-		
+
 		//create search criteria constraints
 		GridBagConstraints searchCritConstraints = new GridBagConstraints();
 		searchCritConstraints.gridx = 0;
@@ -214,7 +219,7 @@ public class SearchLeadsView extends JPanel{
 		table.setFillsViewportHeight(true);
 		table.setAutoCreateRowSorter(true);
 		add(scrollPane, tableConstraints);
-		}
+	}
 
 	public SearchLeadsController getController() {
 		return controller;
@@ -312,12 +317,12 @@ public class SearchLeadsView extends JPanel{
 		this.phoneBox = phoneBox;
 	}
 
-	public JComboBox<String> getIncludedOnOFBox() {
-		return includedOnOFBox;
+	public JCheckBox getIncludedOnOFBox() {
+		return includedOnOFCheckBox;
 	}
 
-	public void setIncludedOnOFBox(JComboBox<String> includedOnOFBox) {
-		this.includedOnOFBox = includedOnOFBox;
+	public void setIncludedOnOFBox(JCheckBox includedOnOFCheckBox) {
+		this.includedOnOFCheckBox = includedOnOFCheckBox;
 	}
 
 	public JComboBox<String> getSubmittedAsBox() {
@@ -368,4 +373,4 @@ public class SearchLeadsView extends JPanel{
 		this.enableIncentiveCheckBox = enableIncentiveCheckBox;
 	}
 
-	}
+}

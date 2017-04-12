@@ -2,6 +2,8 @@ package com.voice.app.Agent_Manager.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collections;
+import java.util.List;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -64,5 +66,20 @@ public class SearchLeadsController implements ActionListener, ChangeListener{
 			view.getIncentiveLowSpinner().setEnabled(false);
 			view.getIncentiveHighSpinner().setEnabled(false);
 		}
+	}
+	
+	/**
+	 * Acts as view's catalyst for populating a combo box's menus.
+	 * Accesses the DAO, pulls all distinct values for a given field,
+	 * adds a blank field, and then sorts the List before converting
+	 * it into an array and returning that array.
+	 * @param fieldName the field to retrieve all distinct values for
+	 * @return the array of distinct values for that field name
+	 */
+	public String[] getComboBoxElements(String fieldName){
+		List<String> result = daoFactory.getLeadDAO().getDistinctValues(fieldName);
+		result.add("");
+		Collections.sort(result);
+		return result.toArray(new String[0]);
 	}
 }
