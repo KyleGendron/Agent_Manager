@@ -19,6 +19,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 
 import org.jdesktop.swingx.JXDatePicker;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 import com.voice.app.Agent_Manager.controller.SearchLeadsController;
 import com.voice.app.Agent_Manager.domain.concrete.LeadRecord;
@@ -101,30 +102,37 @@ public class SearchLeadsView extends JPanel{
 		//dialer
 		JLabel dialerLabel = new JLabel("Dialer: ");
 		dialerBox = new JComboBox<String>(controller.getComboBoxElements("dialer"));
+		AutoCompleteDecorator.decorate(dialerBox);
 
 		//agent
 		JLabel agentLabel = new JLabel("Agent: ");
 		agentBox = new JComboBox<String>(controller.getComboBoxElements("agent"));
+		AutoCompleteDecorator.decorate(agentBox);
 
 		//coid
 		JLabel cOIDLabel = new JLabel("COID: ");
 		cOIDBox = new JComboBox<String>(controller.getComboBoxElements("cOID"));
+		AutoCompleteDecorator.decorate(cOIDBox);
 
 		//aid
 		JLabel aIDLabel = new JLabel("AID: ");
 		aIDBox = new JComboBox<String>(controller.getComboBoxElements("aID"));
+		AutoCompleteDecorator.decorate(aIDBox);
 
 		//campaign
 		JLabel campaignLabel = new JLabel("Campaign: ");
 		campaignBox = new JComboBox<String>(controller.getComboBoxElements("campaign"));
+		AutoCompleteDecorator.decorate(campaignBox);
 
 		//company
 		JLabel companyLabel = new JLabel("Company: ");
 		companyBox = new JComboBox<String>(controller.getComboBoxElements("company"));
+		AutoCompleteDecorator.decorate(companyBox);
 
 		//phone
 		JLabel phoneLabel = new JLabel("Phone: ");
 		phoneBox = new JComboBox<String>(controller.getComboBoxElements("phone"));
+		AutoCompleteDecorator.decorate(phoneBox);
 
 		//include on output file
 		JLabel includedOnOFLabel = new JLabel("Included On Output File: ");
@@ -133,10 +141,12 @@ public class SearchLeadsView extends JPanel{
 		//submitted as
 		JLabel submittedAsLabel = new JLabel("Submitted As: ");
 		submittedAsBox = new JComboBox<String>(controller.getComboBoxElements("submittedAs"));
+		AutoCompleteDecorator.decorate(submittedAsBox);
 
 		//passed type
 		JLabel passedTypeLabel = new JLabel("Passed Type: ");
 		passedTypeBox = new JComboBox<String>(controller.getComboBoxElements("passedType"));
+		AutoCompleteDecorator.decorate(passedTypeBox);
 
 		//whether to search by incentive value
 		enableIncentiveCheckBox = new JCheckBox("Enable Incentive Value Search Range: ");
