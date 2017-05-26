@@ -1,8 +1,11 @@
 package com.voice.app.Agent_Manager.dao.concrete;
 
 import java.util.List;
+import java.util.Map;
 
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -12,6 +15,7 @@ import org.hibernate.cfg.Configuration;
 
 import com.voice.app.Agent_Manager.dao.interfaces.ILeadRecordDAO;
 import com.voice.app.Agent_Manager.domain.concrete.LeadRecord;
+import com.voice.app.Agent_Manager.util.interfaces.Range;
 
 
 /**
@@ -113,7 +117,7 @@ public class LeadRecordDAOHibernate implements ILeadRecordDAO<LeadRecord>{
 		return null;
 	}
 
-	//TODO: Implement another find method that takes in a string for query-builder
+	
 	
 	/**
 	 * Returns all distinct string values of the given field in a list of that field's type.
@@ -146,6 +150,21 @@ public class LeadRecordDAOHibernate implements ILeadRecordDAO<LeadRecord>{
 			tx = session.beginTransaction();
 			TypedQuery<LeadRecord> query = session.createQuery("FROM LeadRecord");
 			return query.getResultList();
+		}catch (HibernateException e) {
+			if (tx!=null) tx.rollback();
+			e.printStackTrace(); 
+		}finally {
+			session.close(); 
+		}
+		return null;
+	}
+
+	@Override
+	public List<LeadRecord> findCriteria(Map<String, String> values, Map<String, Range> ranges) {
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try{
+			tx = session.beginTransaction();
 		}catch (HibernateException e) {
 			if (tx!=null) tx.rollback();
 			e.printStackTrace(); 
